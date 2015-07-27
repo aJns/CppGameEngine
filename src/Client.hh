@@ -4,9 +4,12 @@
 namespace GameEngine {
   class Client
   {
- public:
- private:
-   void render();
+  public:
+    Client();
+    virtual ~Client();
+    void init();
+  private:
+    void render();
   };
 }
 
