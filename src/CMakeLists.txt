@@ -105,6 +105,7 @@ set(HDRS
 
 set(SRCS
   #  ./*.cc
+  ./main.cc
   ./Client.cc
   )
 
