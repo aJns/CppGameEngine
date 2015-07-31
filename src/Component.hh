@@ -1,6 +1,8 @@
 #ifndef COMPONENT_HH
 #define COMPONENT_HH
 
+#include<memory>
+
 #include "GameObject.hh"
 
 namespace GameEngine {
@@ -8,8 +10,10 @@ namespace GameEngine {
   {
   public:
     Component(GameEngine::GameObject owner);
+    ~Component();
+    virtual void update();
   private:
-    GameEngine::GameObject owner_;
+    std::shared_ptr<GameEngine::GameObject> owner_;
   };
 }
 

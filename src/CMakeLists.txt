@@ -97,6 +97,7 @@ endif()
 set(HDRS
   #  ./*.hh
   ./Component.hh
+  ./GraphicsComponent.hh
   ./Logic.hh
   ./Client.hh
   ./GameObject.hh
