@@ -35,7 +35,7 @@ namespace GameEngine {
         void chooseSceneManager(void);
         void createCamera(void);
         void createFrameListener(void);
-        void createScene(void);
+        virtual void createScene(void);
         void destroyScene(void);
         void createViewports(void);
         void setupResources(void);
@@ -58,6 +58,8 @@ namespace GameEngine {
         virtual void windowResized(Ogre::RenderWindow* rw);
         //Unattach OIS before window shutdown (very important under Linux)
         virtual void windowClosed(Ogre::RenderWindow* rw);
+
+    protected:
 
         Ogre::Root *root_;
         Ogre::Camera* camera_;

@@ -107,6 +107,9 @@ set(HDRS
 set(SRCS
   #  ./*.cc
   ./Client.cc
+  ./Component.cc
+  # ./GraphicsComponent.cc
+  # ./GameObject.cc
   )
 
 include_directories( ${OIS_INCLUDE_DIRS}
@@ -117,11 +120,16 @@ include_directories( ${OIS_INCLUDE_DIRS}
 
 add_library( GameEngine 
     ./Client.cc
+    ./Component.cc
+    ./GraphicsComponent.cc
+    ./GameObject.cc
     )
 
 # set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
 
 target_link_libraries(GameEngine ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+
+target_compile_features(GameEngine PRIVATE cxx_range_for)
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
