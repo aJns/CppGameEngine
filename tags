@@ -239,7 +239,7 @@ COMPILER_VERSION_TWEAK	build/CMakeFiles/3.2.3/CompilerIdCXX/CMakeCXXCompilerId.c
 COMPONENT_HH	src/Component.hh	2;"	d
 Client	src/Client.cc	/^GameEngine::Client::Client()$/;"	f	class:GameEngine::Client
 Client	src/Client.hh	/^    class Client : public Ogre::FrameListener, public Ogre::WindowEventListener, public OIS::KeyListener, public OIS::MouseListener, OgreBites::SdkTrayListener$/;"	c	namespace:GameEngine
-Component	src/Component.cc	/^GameEngine::Component::Component(GameEngine::GameObject& owner)$/;"	f	class:GameEngine::Component
+Component	src/Component.cc	/^GameEngine::Component::Component(GameEngine::GameObject& owner) {$/;"	f	class:GameEngine::Component
 Component	src/Component.hh	/^    class Component$/;"	c	namespace:GameEngine
 DEC	build/CMakeFiles/3.2.3/CompilerIdC/CMakeCCompilerId.c	409;"	d	file:
 DEC	build/CMakeFiles/3.2.3/CompilerIdCXX/CMakeCXXCompilerId.cpp	404;"	d	file:
@@ -255,10 +255,10 @@ GameEngine	src/GraphicsComponent.hh	/^namespace GameEngine {$/;"	n
 GameEngine	src/Logic.hh	/^namespace GameEngine {$/;"	n
 GameEngine	src/Server.hh	/^namespace GameEngine {$/;"	n
 GameObject	src/GameObject.cc	/^GameEngine::GameObject::GameObject()$/;"	f	class:GameEngine::GameObject
-GameObject	src/GameObject.hh	/^  class GameObject$/;"	c	namespace:GameEngine
+GameObject	src/GameObject.hh	/^    class GameObject$/;"	c	namespace:GameEngine
 GetCompilationInfoForFile	.ycm_extra_conf.py	/^def GetCompilationInfoForFile( filename ):$/;"	f
 GraphicsComponent	src/GraphicsComponent.cc	/^GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject& owner,$/;"	f	class:GameEngine::GraphicsComponent
-GraphicsComponent	src/GraphicsComponent.hh	/^    class GraphicsComponent : public Component$/;"	c	namespace:GameEngine
+GraphicsComponent	src/GraphicsComponent.hh	/^    class GraphicsComponent : public GameEngine::Component $/;"	c	namespace:GameEngine
 HEX	build/CMakeFiles/3.2.3/CompilerIdC/CMakeCCompilerId.c	420;"	d	file:
 HEX	build/CMakeFiles/3.2.3/CompilerIdCXX/CMakeCXXCompilerId.cpp	415;"	d	file:
 ID_VOID_MAIN	build/CMakeFiles/3.2.3/CompilerIdC/CMakeCCompilerId.c	6;"	d	file:
@@ -374,7 +374,7 @@ features	build/CMakeFiles/feature_tests.cxx	/^  const char features[] = {""$/;"	
 flags	.ycm_extra_conf.py	/^flags = [$/;"	v
 frameRenderingQueued	src/Client.cc	/^bool GameEngine::Client::frameRenderingQueued(const Ogre::FrameEvent& evt)$/;"	f	class:GameEngine::Client
 getNode	src/GraphicsComponent.cc	/^std::shared_ptr<Ogre::SceneNode> GameEngine::GraphicsComponent::getNode() {$/;"	f	class:GameEngine::GraphicsComponent
-graphComp_	src/GameObject.hh	/^    std::shared_ptr<GameEngine::GraphicsComponent> graphComp_;$/;"	m	class:GameEngine::GameObject
+graphComp_	src/GameObject.hh	/^        std::shared_ptr<GameEngine::GraphicsComponent> graphComp_;$/;"	m	class:GameEngine::GameObject
 info_arch	build/CMakeFiles/3.2.3/CompilerIdC/CMakeCCompilerId.c	/^char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";$/;"	v
 info_arch	build/CMakeFiles/3.2.3/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";$/;"	v
 info_compiler	build/CMakeFiles/3.2.3/CompilerIdC/CMakeCCompilerId.c	/^char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";$/;"	v
@@ -408,7 +408,7 @@ overlaySystem_	src/Client.hh	/^        Ogre::OverlaySystem *overlaySystem_;$/;"	
 owner_	src/Component.hh	/^        std::shared_ptr<GameEngine::GameObject> owner_;$/;"	m	class:GameEngine::Component
 pluginsCfg_	src/Client.hh	/^        Ogre::String pluginsCfg_;$/;"	m	class:GameEngine::Client
 position	src/GameObject.cc	/^std::shared_ptr<Ogre::Vector3> GameEngine::GameObject::position() {$/;"	f	class:GameEngine::GameObject
-position_	src/GameObject.hh	/^    Ogre::Vector3 position_;$/;"	m	class:GameEngine::GameObject
+position_	src/GameObject.hh	/^        Ogre::Vector3 position_;$/;"	m	class:GameEngine::GameObject
 qnxnto	build/CMakeFiles/3.2.3/CompilerIdC/CMakeCCompilerId.c	/^char const* qnxnto = "INFO" ":" "qnxnto[]";$/;"	v
 qnxnto	build/CMakeFiles/3.2.3/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* qnxnto = "INFO" ":" "qnxnto[]";$/;"	v
 resourcesCfg_	src/Client.hh	/^        Ogre::String resourcesCfg_;$/;"	m	class:GameEngine::Client

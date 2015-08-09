@@ -1,5 +1,8 @@
 #include "Client.hh"
 
+#include "GameObject.hh"
+#include "GraphicsComponent.hh"
+
 GameEngine::Client::Client()
     : root_(0),
     camera_(0),
@@ -168,9 +171,13 @@ void GameEngine::Client::createFrameListener() {
 
 void GameEngine::Client::createScene() {
     sceneMgr_->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
-    Ogre::Entity* ogreEntity =sceneMgr_->createEntity("ogrehead.mesh");
-    Ogre::SceneNode* ogreNode = sceneMgr_->getRootSceneNode()->createChildSceneNode();
-    ogreNode->attachObject(ogreEntity);
+    /* Ogre::Entity* ogreEntity =sceneMgr_->createEntity("ogrehead.mesh"); */
+    /* Ogre::SceneNode* ogreNode = sceneMgr_->getRootSceneNode()->createChildSceneNode(); */
+    /* ogreNode->attachObject(ogreEntity); */
+
+    GameEngine::GameObject object;
+    object.addGraphicsComponent(*sceneMgr_);
+
     Ogre::Light* light = sceneMgr_->createLight("MainLight");
     light->setPosition(20, 80, 50);
 }
