@@ -171,8 +171,9 @@ void GameEngine::Client::createFrameListener() {
 
 void GameEngine::Client::createScene() {
     sceneMgr_->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
+
     /* Ogre::Entity* ogreEntity =sceneMgr_->createEntity("ogrehead.mesh"); */
-    /* Ogre::SceneNode* ogreNode = sceneMgr_->getRootSceneNode()->createChildSceneNode(); */
+    /* Ogre::SceneNode* ogreNode = sceneMgr_->getRootSceneNode()->createChildSceneNode("TestNode"); */
     /* ogreNode->attachObject(ogreEntity); */
 
     GameEngine::GameObject object;
