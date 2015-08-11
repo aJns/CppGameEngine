@@ -127,16 +127,17 @@ target_compile_features(OgreApp PRIVATE cxx_range_for)
 
 target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
 
-add_library( GameEngine 
-    ./Client.cc
-    ./Component.cc
-    ./GraphicsComponent.cc
-    ./GameObject.cc
-    )
-
-target_link_libraries(GameEngine ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
-
-target_compile_features(GameEngine PRIVATE cxx_range_for)
+# Uncomment to compile static library
+#   add_library( GameEngine 
+#       ./Client.cc
+#       ./Component.cc
+#       ./GraphicsComponent.cc
+#       ./GameObject.cc
+#       )
+#
+#   target_link_libraries(GameEngine ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+#
+#   target_compile_features(GameEngine PRIVATE cxx_range_for)
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
