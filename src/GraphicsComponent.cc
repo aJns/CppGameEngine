@@ -18,3 +18,6 @@ GameEngine::GraphicsComponent::~GraphicsComponent() {
 std::shared_ptr<Ogre::SceneNode> GameEngine::GraphicsComponent::getNode() {
     return node_;
 }
+
+void GameEngine::GraphicsComponent::update() {
+}

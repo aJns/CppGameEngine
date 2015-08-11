@@ -10,7 +10,6 @@ namespace GameEngine {
     {
     public:
         Component(GameEngine::GameObject& owner);
-        Component();
         ~Component();
         virtual void update();
     private:
