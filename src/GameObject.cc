@@ -20,3 +20,9 @@ void GameEngine::GameObject::addGraphicsComponent(Ogre::SceneManager& sceneMgr) 
             new GameEngine::GraphicsComponent(*this, sceneMgr));
     graphComp_ = smartGraph;
 }
+
+void GameEngine::GameObject::update() {
+    if (graphComp_ != nullptr) {
+        graphComp_->update();
+    }
+}

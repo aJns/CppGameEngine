@@ -106,9 +106,10 @@ set(HDRS
 
 set(SRCS
   #  ./*.cc
-  ./Client.cc
   ./Component.cc
   ./GraphicsComponent.cc
+  ./Logic.cc
+  ./Client.cc
   ./GameObject.cc
   ./main.cc
   )

@@ -21,4 +21,5 @@ std::shared_ptr<Ogre::SceneNode> GameEngine::GraphicsComponent::getNode() {
 }
 
 void GameEngine::GraphicsComponent::update() {
+    node_->setPosition(*owner_->position());
 }

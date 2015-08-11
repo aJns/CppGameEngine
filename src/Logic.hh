@@ -1,15 +1,25 @@
 #ifndef LOGIC_HH
 #define LOGIC_HH
 
+#include <memory>
+
+#include <OgreSceneManager.h>
+
 namespace GameEngine {
-   class Logic
-   {
+  class Logic
+  {
   public:
-     void runGameLoop();
+    Logic(Ogre::SceneManager* sceneMgr);
+    ~Logic();
+    void runGameLoop();
+    void setup();
   private:
-     void updateLogic();
-     void processInput();
-   };
+    void updateLogic();
+    void processInput();
+
+  private:
+    std::shared_ptr<Ogre::SceneManager> sceneMgr_;
+  };
 }
 
 #endif // LOGIC_HH

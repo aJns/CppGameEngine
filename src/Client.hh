@@ -20,6 +20,10 @@
 #include <SdkTrays.h>
 #include <SdkCameraMan.h>
 
+#include <memory>
+
+#include "Logic.hh"
+
 namespace GameEngine {
     class Client : public Ogre::FrameListener, public Ogre::WindowEventListener, public OIS::KeyListener, public OIS::MouseListener, OgreBites::SdkTrayListener
     {
@@ -80,6 +84,8 @@ namespace GameEngine {
         OIS::InputManager* inputManager_;
         OIS::Mouse*    mouse_;
         OIS::Keyboard* keyboard_;
+
+        std::shared_ptr<GameEngine::Logic> gameLogic_;
     };
 }
 

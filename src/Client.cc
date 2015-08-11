@@ -17,7 +17,8 @@ GameEngine::Client::Client()
     shutDown_(false),
     inputManager_(0),
     mouse_(0),
-    keyboard_(0)
+    keyboard_(0),
+    gameLogic_(nullptr)
 {
 }
 
@@ -42,6 +43,9 @@ void GameEngine::Client::init() {
 
     if (!setup())
         return;
+
+    gameLogic_ = std::make_shared<GameEngine::Logic>(sceneMgr_);
+    gameLogic_->setup();
 
     root_->startRendering();
 
@@ -176,8 +180,8 @@ void GameEngine::Client::createScene() {
     /* Ogre::SceneNode* ogreNode = sceneMgr_->getRootSceneNode()->createChildSceneNode("TestNode"); */
     /* ogreNode->attachObject(ogreEntity); */
 
-    GameEngine::GameObject object;
-    object.addGraphicsComponent(*sceneMgr_);
+    /* GameEngine::GameObject object; */
+    /* object.addGraphicsComponent(*sceneMgr_); */
 
     Ogre::Light* light = sceneMgr_->createLight("MainLight");
     light->setPosition(20, 80, 50);

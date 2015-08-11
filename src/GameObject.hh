@@ -14,6 +14,7 @@ namespace GameEngine {
         ~GameObject();
         std::shared_ptr<Ogre::Vector3> position();
         void addGraphicsComponent(Ogre::SceneManager& sceneMgr);
+        void update();
     private:
         Ogre::Vector3 position_;
         std::shared_ptr<GameEngine::GraphicsComponent> graphComp_;

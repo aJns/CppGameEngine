@@ -12,7 +12,7 @@ namespace GameEngine {
         Component(GameEngine::GameObject& owner);
         ~Component();
         virtual void update();
-    private:
+    protected:
         std::shared_ptr<GameEngine::GameObject> owner_;
     };
 }
