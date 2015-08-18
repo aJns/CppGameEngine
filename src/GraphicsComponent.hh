@@ -16,10 +16,9 @@ namespace GameEngine {
         GraphicsComponent(GameEngine::GameObject& owner, 
                 Ogre::SceneManager& sceneMgr);
         ~GraphicsComponent();
-        std::shared_ptr<Ogre::SceneNode> getNode();
         virtual void update();
     private:
-        std::shared_ptr<Ogre::SceneNode> node_;
+        Ogre::SceneNode* node_;
     };
 }
 

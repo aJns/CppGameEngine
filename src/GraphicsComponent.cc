@@ -7,17 +7,20 @@ GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject& owner,
     : Component(owner)
 {
     Ogre::Entity* ogreEntity = sceneMgr.createEntity("ogrehead.mesh");
-    node_ = std::shared_ptr<Ogre::SceneNode>
-        (sceneMgr.getRootSceneNode()->createChildSceneNode("ogreNode"));
+    /* Ogre::SceneNode* ogreNode */ 
+    node_ = sceneMgr.getRootSceneNode()->createChildSceneNode("TestNode");
     node_->attachObject(ogreEntity);
-    std::cout << node_->getName() << "\n";
+    /* ogreNode->attachObject(ogreEntity); */
+    /* node_ = std::shared_ptr<Ogre::SceneNode>(ogreNode); */
+
+    /* std::cout << node_->getName(); */
+
+    /* node_ = std::shared_ptr<Ogre::SceneNode> */
+    /*     (sceneMgr.getRootSceneNode()->createChildSceneNode("ogreNode")); */
+    /* node_->attachObject(ogreEntity); */
 }
 
 GameEngine::GraphicsComponent::~GraphicsComponent() {
-}
-
-std::shared_ptr<Ogre::SceneNode> GameEngine::GraphicsComponent::getNode() {
-    return node_;
 }
 
 void GameEngine::GraphicsComponent::update() {

@@ -16,9 +16,12 @@ std::shared_ptr<Ogre::Vector3> GameEngine::GameObject::position() {
 }
 
 void GameEngine::GameObject::addGraphicsComponent(Ogre::SceneManager& sceneMgr) {
-    std::shared_ptr<GameEngine::GraphicsComponent> smartGraph(
-            new GameEngine::GraphicsComponent(*this, sceneMgr));
-    graphComp_ = smartGraph;
+    /* Ogre::Entity* ogreEntity = sceneMgr.createEntity("ogrehead.mesh"); */
+    /* Ogre::SceneNode* ogreNode = sceneMgr.getRootSceneNode()->createChildSceneNode("TestNode"); */
+    /* ogreNode->attachObject(ogreEntity); */
+
+    graphComp_ = std::make_shared<GameEngine::GraphicsComponent>
+        (GameEngine::GraphicsComponent(*this, sceneMgr));
 }
 
 void GameEngine::GameObject::update() {
