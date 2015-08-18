@@ -11,10 +11,6 @@ GameEngine::GameObject::GameObject()
 GameEngine::GameObject::~GameObject() {
 }
 
-std::shared_ptr<Ogre::Vector3> GameEngine::GameObject::position() {
-    return std::make_shared<Ogre::Vector3>(position_);
-}
-
 void GameEngine::GameObject::addGraphicsComponent(Ogre::SceneManager& sceneMgr) {
     /* Ogre::Entity* ogreEntity = sceneMgr.createEntity("ogrehead.mesh"); */
     /* Ogre::SceneNode* ogreNode = sceneMgr.getRootSceneNode()->createChildSceneNode("TestNode"); */
@@ -28,4 +24,16 @@ void GameEngine::GameObject::update() {
     if (graphComp_ != nullptr) {
         graphComp_->update();
     }
+}
+
+std::shared_ptr<Ogre::Vector3> const GameEngine::GameObject::position() const {
+    return std::make_shared<Ogre::Vector3>(position_);
+}
+
+void GameEngine::GameObject::translate(std::shared_ptr<Ogre::Vector3> const vector) {
+    position_ += *vector;
+}
+
+void GameEngine::GameObject::moveTo(std::shared_ptr<Ogre::Vector3> const vector) {
+    position_ = *vector;
 }

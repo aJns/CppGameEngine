@@ -12,9 +12,11 @@ namespace GameEngine {
     public:
         GameObject();
         ~GameObject();
-        std::shared_ptr<Ogre::Vector3> position();
         void addGraphicsComponent(Ogre::SceneManager& sceneMgr);
         void update();
+        std::shared_ptr<Ogre::Vector3> const position() const;
+        void translate(std::shared_ptr<Ogre::Vector3> const vector);
+        void moveTo(std::shared_ptr<Ogre::Vector3> const vector);
     private:
         Ogre::Vector3 position_;
         std::shared_ptr<GameEngine::GraphicsComponent> graphComp_;
