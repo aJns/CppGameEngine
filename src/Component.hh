@@ -10,7 +10,7 @@ namespace GameEngine {
     {
     public:
         Component(GameEngine::GameObject& owner);
-        ~Component();
+        virtual ~Component();
         virtual void update();
     protected:
         std::shared_ptr<GameEngine::GameObject> owner_;

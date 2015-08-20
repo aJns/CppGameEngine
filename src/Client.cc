@@ -1,6 +1,5 @@
 #include "Client.hh"
 
-#include "GameObject.hh"
 #include "GraphicsComponent.hh"
 
 GameEngine::Client::Client()
@@ -179,9 +178,6 @@ void GameEngine::Client::createScene() {
     /* Ogre::Entity* ogreEntity = sceneMgr_->createEntity("ogrehead.mesh"); */
     /* Ogre::SceneNode* ogreNode = sceneMgr_->getRootSceneNode()->createChildSceneNode("TestNode"); */
     /* ogreNode->attachObject(ogreEntity); */
-
-    /* GameEngine::GameObject object; */
-    /* object.addGraphicsComponent(*sceneMgr_); */
 
     Ogre::Light* light = sceneMgr_->createLight("MainLight");
     light->setPosition(20, 80, 50);

@@ -21,7 +21,8 @@ namespace GameEngine {
 
   private:
     std::shared_ptr<Ogre::SceneManager> sceneMgr_;
-    std::shared_ptr<GameEngine::GameObject> gameObject_;
+    /* std::shared_ptr<GameEngine::GameObject> gameObject_; */
+    GameEngine::GameObject gameObject_;
     
     const bool* shutDown_;
   };
