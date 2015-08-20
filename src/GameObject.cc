@@ -1,11 +1,7 @@
-#include "GameObject.hh"
-
-// Need to include things here to work around circular dependencies
+// GameEngine
 #include "GraphicsComponent.hh"
 
-
-// TODO: Remove when done
-#include <iostream>
+#include "GameObject.hh"
 
 GameEngine::GameObject::GameObject()
     : position_(0,0,0),
@@ -13,20 +9,12 @@ GameEngine::GameObject::GameObject()
 {}
 
 GameEngine::GameObject::~GameObject() {
-    std::cout << "**** **** **** **** **** **** **** ****" << std::endl;
-
-    std::cout << "Deleting GameObject" << std::endl;
-
-    std::cout << "**** **** **** **** **** **** **** ****" << std::endl;
-
     if(graphComp_) {
         delete graphComp_;
     }
 }
 
 void GameEngine::GameObject::addGraphicsComponent(Ogre::SceneManager& sceneMgr) {
-    /* graphComp_ = std::make_shared<GameEngine::GraphicsComponent> */
-    /*     (GameEngine::GraphicsComponent(*this, sceneMgr)); */
     graphComp_ = new GameEngine::GraphicsComponent(*this, sceneMgr);
 }
 

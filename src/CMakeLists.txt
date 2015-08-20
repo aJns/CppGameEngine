@@ -102,6 +102,8 @@ set(HDRS
   ./Client.hh
   ./GameObject.hh
   ./Server.hh
+  ./GameLoop.hh
+  ./Utils.hh
   )
 
 set(SRCS
@@ -111,8 +113,12 @@ set(SRCS
   ./Logic.cc
   ./Client.cc
   ./GameObject.cc
+  ./GameLoop.cc
+  ./Utils.cc
   ./main.cc
   )
+
+find_package (Threads)
 
 include_directories( ${OIS_INCLUDE_DIRS}
   ${OGRE_INCLUDE_DIRS}
@@ -126,7 +132,11 @@ set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
 
 target_compile_features(OgreApp PRIVATE cxx_range_for)
 
-target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+target_link_libraries(OgreApp ${OGRE_LIBRARIES} 
+    ${OIS_LIBRARIES} 
+    ${OGRE_Overlay_LIBRARIES}
+    ${CMAKE_THREAD_LIBS_INIT}
+    )
 
 # Uncomment to compile static library
 #   add_library( GameEngine 

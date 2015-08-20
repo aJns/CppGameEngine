@@ -3,6 +3,7 @@
 #ifndef CLIENT_HH
 #define CLIENT_HH
 
+// Ogre3D
 #include <OgreCamera.h>
 #include <OgreEntity.h>
 #include <OgreLogManager.h>
@@ -12,16 +13,20 @@
 #include <OgreRenderWindow.h>
 #include <OgreConfigFile.h>
 
+// OIS
 #include <OISEvents.h>
 #include <OISInputManager.h>
 #include <OISKeyboard.h>
 #include <OISMouse.h>
 
+// OgreSDK
 #include <SdkTrays.h>
 #include <SdkCameraMan.h>
 
+// std
 #include <memory>
 
+// GameEngine
 #include "Logic.hh"
 
 namespace GameEngine {
@@ -85,7 +90,7 @@ namespace GameEngine {
         OIS::Mouse*    mouse_;
         OIS::Keyboard* keyboard_;
 
-        std::shared_ptr<GameEngine::Logic> gameLogic_;
+        GameEngine::Logic* gameLogic_;
     };
 }
 

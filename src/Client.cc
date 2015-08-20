@@ -1,6 +1,13 @@
+// GameEngine
+#include "GraphicsComponent.hh"
+#include "GameLoop.hh"
+
+// std
+#include <thread>
+
+
 #include "Client.hh"
 
-#include "GraphicsComponent.hh"
 
 GameEngine::Client::Client()
     : root_(0),
@@ -24,6 +31,7 @@ GameEngine::Client::Client()
 GameEngine::Client::~Client() {
     if (trayMgr_) delete trayMgr_;
     if (cameraMan_) delete cameraMan_;
+    if (gameLogic_) delete gameLogic_;
 
     //Remove ourself as a Window listener
     Ogre::WindowEventUtilities::removeWindowEventListener(window_, this);
@@ -43,8 +51,10 @@ void GameEngine::Client::init() {
     if (!setup())
         return;
 
-    gameLogic_ = std::make_shared<GameEngine::Logic>(sceneMgr_);
+    gameLogic_ = new GameEngine::Logic(sceneMgr_);
     gameLogic_->setup(shutDown_);
+    std::thread logicThread(GameEngine::gameLoop, std::ref(shutDown_),
+            std::ref(*gameLogic_));
 
     root_->startRendering();
 

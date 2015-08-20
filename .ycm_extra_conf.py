@@ -84,7 +84,11 @@ flags = [
 '-isystem',
 '/usr/include/OGRE',
 '-isystem',
-'/usr/include/OIS'
+'/usr/include/OIS',
+'-isystem',
+'/usr/include/boost',
+'-isystem',
+'/usr/include'
 ]
 
 

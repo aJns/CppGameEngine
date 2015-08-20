@@ -1,14 +1,16 @@
-#include "Logic.hh"
-
+// std
 #include <thread>
+
+// Ogre3D
 #include <OgreVector3.h>
 
+// GameEngine
 #include "GameObject.hh"
 #include "GameLoop.hh"
+#include "Utils.hh"
 
+#include "Logic.hh"
 
-// TODO: Remove when done
-#include <iostream>
 
 GameEngine::Logic::Logic(Ogre::SceneManager* sceneMgr) 
     : sceneMgr_(sceneMgr),
@@ -18,17 +20,14 @@ GameEngine::Logic::Logic(Ogre::SceneManager* sceneMgr)
 {}
 
 GameEngine::Logic::~Logic() {
-    std::cout << "**** **** **** **** **** **** **** ****" << std::endl;
-
-    std::cout << "Deleting Logic" << std::endl;
-
-    std::cout << "**** **** **** **** **** **** **** ****" << std::endl;
 }
 
 void GameEngine::Logic::runGameLoop() {
     if(shutDown_ == nullptr) {
         return;
     }
+
+    GameEngine::visibleMsg("running loop...");
 
     /* std::thread logicThread(GameEngine::gameLoop, *shutDown_, std::ref(*this)); */
 }
@@ -44,6 +43,9 @@ void GameEngine::Logic::updateLogic() {
     Ogre::Vector3 vector(10, 10, 10);
     /* gameObject_->translate(std::make_shared<Ogre::Vector3>(vector)); */
     gameObject_.translate(vector);
+    gameObject_.update();
+
+    GameEngine::visibleMsg("Moved GameObject");
 }
 
 void GameEngine::Logic::processInput() {
