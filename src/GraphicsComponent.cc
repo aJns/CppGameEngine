@@ -1,8 +1,13 @@
+// Ogre3D
+#include <OgreString.h>
+
+// GameEngine
+#include "Utils.hh"
+
 #include "GraphicsComponent.hh"
 
-#include <iostream>
 
-GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject& owner,
+GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject* owner,
         Ogre::SceneManager& sceneMgr)
     : Component(owner)
 {
@@ -17,4 +22,6 @@ GameEngine::GraphicsComponent::~GraphicsComponent() {
 
 void GameEngine::GraphicsComponent::update() {
     node_->setPosition(*owner_->position());
+    GameEngine::visibleMsg(Ogre::StringConverter::toString(*owner_->position()));
+    std::cout << owner_;
 }

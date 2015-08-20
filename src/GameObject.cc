@@ -1,7 +1,9 @@
 // GameEngine
 #include "GraphicsComponent.hh"
+#include "Utils.hh"
 
 #include "GameObject.hh"
+
 
 GameEngine::GameObject::GameObject()
     : position_(0,0,0),
@@ -15,7 +17,8 @@ GameEngine::GameObject::~GameObject() {
 }
 
 void GameEngine::GameObject::addGraphicsComponent(Ogre::SceneManager& sceneMgr) {
-    graphComp_ = new GameEngine::GraphicsComponent(*this, sceneMgr);
+    graphComp_ = new GameEngine::GraphicsComponent(this, sceneMgr);
+    std::cout << "A graphComp added to object: " << this << std::endl;
 }
 
 void GameEngine::GameObject::update() {
@@ -30,6 +33,8 @@ std::shared_ptr<Ogre::Vector3> const GameEngine::GameObject::position() const {
 
 void GameEngine::GameObject::translate(Ogre::Vector3 const& vector) {
     position_ += vector;
+    GameEngine::visibleMsg(Ogre::StringConverter::toString(position_));
+    std::cout << this;
 }
 
 void GameEngine::GameObject::moveTo(Ogre::Vector3 const& vector) {
