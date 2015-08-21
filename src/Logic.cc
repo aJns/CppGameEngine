@@ -28,8 +28,6 @@ void GameEngine::Logic::runGameLoop() {
     }
 
     GameEngine::visibleMsg("running loop...");
-
-    /* std::thread logicThread(GameEngine::gameLoop, *shutDown_, std::ref(*this)); */
 }
 
 void GameEngine::Logic::setup(const bool& shutDown) {
@@ -40,7 +38,7 @@ void GameEngine::Logic::setup(const bool& shutDown) {
 }
 
 void GameEngine::Logic::updateLogic() {
-    Ogre::Vector3 vector(10, 10, 10);
+    Ogre::Vector3 vector(0.25, 0, 0);
     gameObject_.translate(vector);
     gameObject_.update();
 }

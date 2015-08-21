@@ -60,6 +60,8 @@ void GameEngine::Client::init() {
 
     // clean up
     destroyScene();
+
+    logicThread.join();
 }
 
 bool GameEngine::Client::setup() {
