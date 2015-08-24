@@ -28,8 +28,6 @@ void GameEngine::Logic::runGameLoop() {
     }
 
     GameEngine::visibleMsg("running loop...");
-
-    /* std::thread logicThread(GameEngine::gameLoop, *shutDown_, std::ref(*this)); */
 }
 
 void GameEngine::Logic::setup(const bool& shutDown) {
