@@ -9,9 +9,24 @@
 
 
 void GameEngine::gameLoop(const bool& shutDown, GameEngine::Logic& gameLogic) {
-    GameEngine::visibleMsg("gameLoop'd");
+    const std::chrono::duration<double> TIME_PER_UPDATE(0.033);
+
+
+    std::chrono::time_point<std::chrono::system_clock> previousTime,
+        currentTime;
+    std::chrono::duration<double> lag(0.0);
+    previousTime = std::chrono::system_clock::now();
     while(!shutDown) {
-        gameLogic.updateLogic();
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        currentTime = std::chrono::system_clock::now();
+        lag += (currentTime - previousTime);
+        previousTime = currentTime;
+
+        while(lag >= TIME_PER_UPDATE) {
+
+            std::cout << lag.count() << " : " << TIME_PER_UPDATE.count() << std::endl;
+
+            gameLogic.updateLogic();
+            lag -= TIME_PER_UPDATE;
+        }
     }
 }

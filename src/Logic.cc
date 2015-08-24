@@ -40,7 +40,7 @@ void GameEngine::Logic::setup(const bool& shutDown) {
 }
 
 void GameEngine::Logic::updateLogic() {
-    Ogre::Vector3 vector(10, 10, 10);
+    Ogre::Vector3 vector(1, 1, 1);
     gameObject_.translate(vector);
     gameObject_.update();
 }
