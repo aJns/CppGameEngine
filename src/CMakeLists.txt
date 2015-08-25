@@ -120,10 +120,16 @@ set(SRCS
 
 find_package (Threads)
 
+find_package(PythonLibs REQUIRED)
+
+find_package(Boost 1.58.0 COMPONENTS python3)
+
 include_directories( ${OIS_INCLUDE_DIRS}
   ${OGRE_INCLUDE_DIRS}
   ${OGRE_SAMPLES_INCLUDEPATH}
   ${OGRE_Overlay_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
+  ${PYTHON_INCLUDE_DIRS}
   )
 
 add_executable(OgreApp WIN32 ${HDRS} ${SRCS})
@@ -132,10 +138,13 @@ add_executable(OgreApp WIN32 ${HDRS} ${SRCS})
 
 target_compile_features(OgreApp PRIVATE cxx_range_for)
 
-target_link_libraries(OgreApp ${OGRE_LIBRARIES} 
+target_link_libraries(OgreApp 
+    ${OGRE_LIBRARIES} 
     ${OIS_LIBRARIES} 
     ${OGRE_Overlay_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
+    ${Boost_LIBRARIES}
+    ${PYTHON_LIBRARIES}
     )
 
 add_library( GameEngine SHARED ${SRCS}
@@ -152,6 +161,9 @@ target_link_libraries(GameEngine
     ${OGRE_LIBRARIES} 
     ${OIS_LIBRARIES} 
     ${OGRE_Overlay_LIBRARIES}
+    ${CMAKE_THREAD_LIBS_INIT}
+    ${Boost_LIBRARIES}
+    ${PYTHON_LIBRARIES}
     )
 
 target_compile_features(GameEngine PRIVATE cxx_range_for)

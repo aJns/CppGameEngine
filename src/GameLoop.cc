@@ -2,6 +2,9 @@
 #include <chrono>
 #include <thread>
 
+// Boost
+#include <boost/python.hpp>
+
 // GameEngine
 #include "Utils.hh"
 
@@ -9,6 +12,9 @@
 
 
 void GameEngine::gameLoop(const bool& shutDown, GameEngine::Logic& gameLogic) {
+
+    Py_Initialize();
+
     const std::chrono::duration<double> TIME_PER_UPDATE(0.033);
     std::chrono::time_point<std::chrono::system_clock> previousTime,
         currentTime;
@@ -26,5 +32,14 @@ void GameEngine::gameLoop(const bool& shutDown, GameEngine::Logic& gameLogic) {
         }
 
         std::this_thread::sleep_for(TIME_PER_UPDATE - lag);
+
+
+        try {
+            GameEngine::visibleMsg("Executing script...");
+            /* boost::python::exec_file("test.py"); */
+        }
+        catch(...) {
+            std::cout << "Python error!" << std::endl;
+        }
     }
 }

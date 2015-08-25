@@ -88,6 +88,10 @@ flags = [
 '-isystem',
 '/usr/include/boost',
 '-isystem',
+'/usr/include/boost/python',
+'-isystem',
+'/usr/include/python3.4m',
+'-isystem',
 '/usr/include'
 ]
 
