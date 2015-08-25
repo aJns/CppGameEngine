@@ -128,7 +128,7 @@ include_directories( ${OIS_INCLUDE_DIRS}
 
 add_executable(OgreApp WIN32 ${HDRS} ${SRCS})
 
-set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
+# set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
 
 target_compile_features(OgreApp PRIVATE cxx_range_for)
 
@@ -138,17 +138,23 @@ target_link_libraries(OgreApp ${OGRE_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
     )
 
-# Uncomment to compile static library
-#   add_library( GameEngine 
-#       ./Client.cc
-#       ./Component.cc
-#       ./GraphicsComponent.cc
-#       ./GameObject.cc
-#       )
-#
-#   target_link_libraries(GameEngine ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
-#
-#   target_compile_features(GameEngine PRIVATE cxx_range_for)
+add_library( GameEngine SHARED ${SRCS}
+    # ./Component.cc
+    # ./GraphicsComponent.cc
+    # ./Logic.cc
+    # ./Client.cc
+    # ./GameObject.cc
+    # ./GameLoop.cc
+    # ./Utils.cc
+    )
+
+target_link_libraries(GameEngine 
+    ${OGRE_LIBRARIES} 
+    ${OIS_LIBRARIES} 
+    ${OGRE_Overlay_LIBRARIES}
+    )
+
+target_compile_features(GameEngine PRIVATE cxx_range_for)
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
