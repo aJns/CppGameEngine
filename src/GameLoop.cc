@@ -36,18 +36,12 @@ void GameEngine::gameLoop(const bool& shutDown, GameEngine::Logic& gameLogic) {
 
 
         try {
-            GameEngine::visibleMsg("Executing script...");
-            /* boost::python::exec_file("test.py"); */
-
-
-            namespace python = boost::python;
-
             // Create the python environment
-            python::object main = python::import("__main__");
-            python::object global(main.attr("__dict__"));
+            boost::python::object main = boost::python::import("__main__");
+            boost::python::object global(main.attr("__dict__"));
 
-            /* python::exec("print('hello world')", global, global); */
-            python::object result = python::exec_file("test.py", global, global);
+            boost::python::object result =
+                boost::python::exec_file("./scripts/test.py", global, global);
         }
         catch(...) {
             std::cout << "Python error!" << std::endl;
