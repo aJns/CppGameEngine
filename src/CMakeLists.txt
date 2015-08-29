@@ -104,6 +104,7 @@ set(HDRS
   ./Server.hh
   ./GameLoop.hh
   ./Utils.hh
+  ./PythonInterface.hh
   )
 
 set(SRCS
@@ -115,6 +116,7 @@ set(SRCS
   ./GameObject.cc
   ./GameLoop.cc
   ./Utils.cc
+  ./PythonInterface.cc
   ./main.cc
   )
 
