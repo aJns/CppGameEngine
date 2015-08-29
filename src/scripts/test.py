@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append('/home/nikulaj/projects/GameEngine/build')
+
 import libGameEngine
 
 def test():
