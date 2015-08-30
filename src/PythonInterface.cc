@@ -3,23 +3,33 @@
 
 // Boost
 #include <boost/python.hpp>
-#include <boost/make_shared.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/noncopyable.hpp>
+
+// Ogre3D
+#include <OgreVector3.h>
+
+// GameEngine
+#include "GameObject.hh"
 
 
 #include "PythonInterface.hh"
 
-
-boost::shared_ptr<Ogre::Vector3> GameEngine::python::createVector(double x,
-        double y, double z) {
-    std::cout << "Python module working!";
-    return boost::make_shared<Ogre::Vector3>(x, y, z);
-}
 
 void GameEngine::python::testFunc() {
     std::cout << "Python module working!" << std::endl;
 }
 
 BOOST_PYTHON_MODULE(libGameEngine) {
-    /* boost::python::def("createVector", GameEngine::python::createVector); */
+    using namespace boost::python;
+
+    // Tests
     boost::python::def("testFunc", GameEngine::python::testFunc);
+
+    // Ogre3D
+    class_<Ogre::Vector3>("Vector3", init<Ogre::Real,Ogre::Real,Ogre::Real>());
+
+    // GameEngine
+    class_<GameEngine::GameObject, boost::shared_ptr<GameEngine::GameObject>, boost::noncopyable>("GameObject", no_init)
+        .def("translate", &GameEngine::GameObject::translate);
 }

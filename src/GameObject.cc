@@ -1,3 +1,6 @@
+// Boost
+#include <boost/python.hpp>
+
 // GameEngine
 #include "GraphicsComponent.hh"
 #include "Utils.hh"

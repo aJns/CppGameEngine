@@ -3,6 +3,7 @@
 
 // Boost
 #include <boost/python.hpp>
+#include <boost/shared_ptr.hpp>
 
 // Ogre3D
 #include <OgreVector3.h>
@@ -57,6 +58,14 @@ void GameEngine::Logic::updateLogic() {
 
         boost::python::object result =
             boost::python::exec_file("./scripts/test.py", global, global);
+        boost::python::object test = global["test"];
+
+        if(!test.is_none()) {
+            boost::shared_ptr<GameEngine::GameObject> testPtr(&gameObject_);
+            test(testPtr);
+        } else {
+            std::cout << "didnt work :(" << std::endl;
+        }
     }
     catch(...) {
         std::cout << "Python error!" << std::endl;
