@@ -45,12 +45,6 @@ void GameEngine::Logic::setup(const bool& shutDown) {
 }
 
 void GameEngine::Logic::updateLogic() {
-    Ogre::Vector3 vector(0.10, 0, 0);
-    gameObject_.translate(vector);
-    gameObject_.update();
-
-
-
     try {
         // Create the python environment
         boost::python::object main = boost::python::import("__main__");
@@ -61,7 +55,6 @@ void GameEngine::Logic::updateLogic() {
         boost::python::object test = global["test"];
 
         if(!test.is_none()) {
-            /* boost::shared_ptr<GameEngine::GameObject> testPtr(&gameObject_); */
             test(boost::ref(gameObject_));
         } else {
             std::cout << "didnt work :(" << std::endl;
