@@ -21,6 +21,10 @@ GameEngine::ScriptComponent::ScriptComponent(GameEngine::GameObject* owner,
     }
 }
 
+GameEngine::ScriptComponent::~ScriptComponent() {
+
+}
+
 void GameEngine::ScriptComponent::update() {
     try {
         if(!script_.is_none()) {

@@ -98,6 +98,7 @@ set(HDRS
   #  ./*.hh
   ./Component.hh
   ./GraphicsComponent.hh
+  ./ScriptComponent.hh
   ./Logic.hh
   ./Client.hh
   ./GameObject.hh
@@ -111,6 +112,7 @@ set(SRCS
   #  ./*.cc
   ./Component.cc
   ./GraphicsComponent.cc
+  ./ScriptComponent.cc
   ./Logic.cc
   ./Client.cc
   ./GameObject.cc

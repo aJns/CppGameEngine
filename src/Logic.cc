@@ -38,33 +38,35 @@ void GameEngine::Logic::setup(const bool& shutDown) {
     shutDown_ = &shutDown;
     /* gameObject_ = std::make_shared<GameEngine::GameObject>(); */
     /* gameObject_->addGraphicsComponent(*sceneMgr_); */
-    gameObject_.addGraphicsComponent(*sceneMgr_);
 
     Py_Initialize();
     std::cout << "Using Python " << Py_GetVersion() << std::endl;
+
+    gameObject_.addGraphicsComponent(*sceneMgr_);
+    gameObject_.addScriptComponent("test");
 }
 
 void GameEngine::Logic::updateLogic() {
     gameObject_.update();
-    try {
-        // Create the python environment
-        boost::python::object main = boost::python::import("__main__");
-        boost::python::object global(main.attr("__dict__"));
+    /* try { */
+    /*     // Create the python environment */
+    /*     boost::python::object main = boost::python::import("__main__"); */
+    /*     boost::python::object global(main.attr("__dict__")); */
 
-        boost::python::object result =
-            boost::python::exec_file("./scripts/test.py", global, global);
-        boost::python::object test = global["test"];
+    /*     boost::python::object result = */
+    /*         boost::python::exec_file("./scripts/test.py", global, global); */
+    /*     boost::python::object test = global["test"]; */
 
-        if(!test.is_none()) {
-            test(boost::ref(gameObject_));
-        } else {
-            std::cout << "didnt work :(" << std::endl;
-        }
-    }
-    catch(...) {
-        std::cout << "Python error!" << std::endl;
-        PyErr_Print();
-    }
+    /*     if(!test.is_none()) { */
+    /*         test(boost::ref(gameObject_)); */
+    /*     } else { */
+    /*         std::cout << "didnt work :(" << std::endl; */
+    /*     } */
+    /* } */
+    /* catch(...) { */
+    /*     std::cout << "Python error!" << std::endl; */
+    /*     PyErr_Print(); */
+    /* } */
 }
 
 void GameEngine::Logic::processInput() {
