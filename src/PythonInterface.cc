@@ -30,6 +30,8 @@ BOOST_PYTHON_MODULE(libGameEngine) {
     class_<Ogre::Vector3>("Vector3", init<Ogre::Real,Ogre::Real,Ogre::Real>());
 
     // GameEngine
-    class_<GameEngine::GameObject, boost::shared_ptr<GameEngine::GameObject>, boost::noncopyable>("GameObject", no_init)
+    /* class_<GameEngine::GameObject, boost::shared_ptr<GameEngine::GameObject>, boost::noncopyable>("GameObject", no_init) */
+    /*     .def("translate", &GameEngine::GameObject::translate); */
+    class_<GameEngine::GameObject, boost::noncopyable>("GameObject", no_init)
         .def("translate", &GameEngine::GameObject::translate);
 }

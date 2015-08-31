@@ -10,5 +10,5 @@ def test(gameObject):
 
     # libGameEngine.createVector(0,0,0)
 
-    libGameEngine.gameObject.translate(libGameEngine.Vector3(-1, 0, 0))
+    gameObject.translate(libGameEngine.Vector3(-1, 0, 0))
     libGameEngine.testFunc()

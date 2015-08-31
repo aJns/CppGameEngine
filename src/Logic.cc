@@ -61,8 +61,8 @@ void GameEngine::Logic::updateLogic() {
         boost::python::object test = global["test"];
 
         if(!test.is_none()) {
-            boost::shared_ptr<GameEngine::GameObject> testPtr(&gameObject_);
-            test(testPtr);
+            /* boost::shared_ptr<GameEngine::GameObject> testPtr(&gameObject_); */
+            test(boost::ref(gameObject_));
         } else {
             std::cout << "didnt work :(" << std::endl;
         }
