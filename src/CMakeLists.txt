@@ -119,7 +119,6 @@ set(SRCS
   ./GameLoop.cc
   ./Utils.cc
   ./PythonInterface.cc
-  ./main.cc
   )
 
 find_package (Threads)
@@ -136,7 +135,8 @@ include_directories( ${OIS_INCLUDE_DIRS}
   ${PYTHON_INCLUDE_DIRS}
   )
 
-add_executable(OgreApp WIN32 ${HDRS} ${SRCS})
+add_executable(OgreApp WIN32 ./main.cc )
+# ${HDRS} ${SRCS})
 
 # set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
 
@@ -149,6 +149,7 @@ target_link_libraries(OgreApp
     ${CMAKE_THREAD_LIBS_INIT}
     ${Boost_LIBRARIES}
     ${PYTHON_LIBRARIES}
+    /home/nikulaj/projects/GameEngine/build/libGameEngine.so
     )
 
 add_library( GameEngine SHARED ${SRCS}
