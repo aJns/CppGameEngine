@@ -41,9 +41,20 @@ void GameEngine::Logic::setup(const bool& shutDown) {
 
     Py_Initialize();
     std::cout << "Using Python " << Py_GetVersion() << std::endl;
+    
+    try {
+        // Create the python environment
+        boost::python::object main = boost::python::import("__main__");
+        /* boost::python::object global(main.attr("__dict__")); */
+        pythonGlobal_ = std::make_shared<boost::python::object>(main.attr("__dict__"));
+    }
+    catch(...) {
+        std::cout << "Python error!" << std::endl;
+        PyErr_Print();
+    }
 
     gameObject_.addGraphicsComponent(*sceneMgr_);
-    gameObject_.addScriptComponent("test");
+    gameObject_.addScriptComponent("test", *pythonGlobal_);
 }
 
 void GameEngine::Logic::updateLogic() {
