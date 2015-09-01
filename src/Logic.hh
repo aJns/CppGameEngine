@@ -1,10 +1,16 @@
 #ifndef LOGIC_HH
 #define LOGIC_HH
 
+// std
 #include <memory>
 
+// Boost
+#include <boost/python.hpp>
+
+// Ogre3D
 #include <OgreSceneManager.h>
 
+// GameEngine
 #include "GameObject.hh"
 
 namespace GameEngine {
@@ -21,7 +27,7 @@ namespace GameEngine {
 
   private:
     std::shared_ptr<Ogre::SceneManager> sceneMgr_;
-    /* std::shared_ptr<GameEngine::GameObject> gameObject_; */
+    std::shared_ptr<boost::python::object> pythonGlobal_;
     GameEngine::GameObject gameObject_;
     
     const bool* shutDown_;

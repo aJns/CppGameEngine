@@ -28,18 +28,9 @@ void GameEngine::GameObject::addGraphicsComponent(Ogre::SceneManager& sceneMgr) 
     graphComp_ = new GameEngine::GraphicsComponent(this, sceneMgr);
 }
 
-void GameEngine::GameObject::addScriptComponent(std::string scriptName) {
-    try {
-        // Create the python environment
-        boost::python::object main = boost::python::import("__main__");
-        boost::python::object global(main.attr("__dict__"));
-
-        scriptComp_ = new GameEngine::ScriptComponent(this, scriptName, global);
-    }
-    catch(...) {
-        std::cout << "Python error!" << std::endl;
-        PyErr_Print();
-    }
+void GameEngine::GameObject::addScriptComponent(std::string scriptName, 
+        boost::python::object& global) {
+    scriptComp_ = new GameEngine::ScriptComponent(this, scriptName, global);
 }
 
 void GameEngine::GameObject::update() {
