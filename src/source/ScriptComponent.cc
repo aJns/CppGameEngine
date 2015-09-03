@@ -13,7 +13,8 @@ GameEngine::ScriptComponent::ScriptComponent(GameEngine::GameObject* owner,
         boost::python::str filenameStr(filename);
         boost::python::object result =
             boost::python::exec_file(filenameStr, global, global);
-        script_ = global["test"];
+        boost::python::object testClass = global["test"];
+        script_ = testClass(boost::ref(*owner));
     }
     catch(...) {
         std::cout << "Python error!" << std::endl;
@@ -28,7 +29,7 @@ GameEngine::ScriptComponent::~ScriptComponent() {
 void GameEngine::ScriptComponent::update() {
     try {
         if(!script_.is_none()) {
-            script_(boost::ref(*owner_));
+            script_.attr("foo")();
         } else {
             std::cout << "Script is null!" << std::endl;
         }
