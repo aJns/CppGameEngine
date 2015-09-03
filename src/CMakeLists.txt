@@ -94,31 +94,35 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
   set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
 
-set(HDRS
+file(GLOB HDRS
+    "./headers/*"
+#set(HDRS
   #  ./*.hh
-  ./Component.hh
-  ./GraphicsComponent.hh
-  ./ScriptComponent.hh
-  ./Logic.hh
-  ./Client.hh
-  ./GameObject.hh
-  ./Server.hh
-  ./GameLoop.hh
-  ./Utils.hh
-  ./PythonInterface.hh
+  # ./Component.hh
+  # ./GraphicsComponent.hh
+  # ./ScriptComponent.hh
+  # ./Logic.hh
+  # ./Client.hh
+  # ./GameObject.hh
+  # ./Server.hh
+  # ./GameLoop.hh
+  # ./Utils.hh
+  # ./PythonInterface.hh
   )
 
-set(SRCS
+file(GLOB SRCS
+    "./source/*"
+#set(SRCS
   #  ./*.cc
-  ./Component.cc
-  ./GraphicsComponent.cc
-  ./ScriptComponent.cc
-  ./Logic.cc
-  ./Client.cc
-  ./GameObject.cc
-  ./GameLoop.cc
-  ./Utils.cc
-  ./PythonInterface.cc
+  # ./Component.cc
+  # ./GraphicsComponent.cc
+  # ./ScriptComponent.cc
+  # ./Logic.cc
+  # ./Client.cc
+  # ./GameObject.cc
+  # ./GameLoop.cc
+  # ./Utils.cc
+  # ./PythonInterface.cc
   )
 
 find_package (Threads)
@@ -133,6 +137,7 @@ include_directories( ${OIS_INCLUDE_DIRS}
   ${OGRE_Overlay_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS}
   ${PYTHON_INCLUDE_DIRS}
+  ./headers
   )
 
 add_executable(OgreApp WIN32 ./main.cc )
@@ -152,7 +157,7 @@ target_link_libraries(OgreApp
     /home/nikulaj/projects/GameEngine/build/libGameEngine.so
     )
 
-add_library( GameEngine SHARED ${SRCS}
+add_library( GameEngine SHARED ${HDRS} ${SRCS}
     # ./Component.cc
     # ./GraphicsComponent.cc
     # ./Logic.cc

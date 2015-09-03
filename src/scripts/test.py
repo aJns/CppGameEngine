@@ -7,7 +7,13 @@ import libGameEngine
 import random
 
 def test(gameObject):
-    x = random.uniform(-1,1)
-    y = random.uniform(-1,1)
-    z = random.uniform(-1,1)
-    gameObject.translate(libGameEngine.Vector3(x, y, z))
+    return testClass(gameObject)
+
+class testClass:
+    def __init__(self, gameObject):
+        self.gameObject = gameObject
+        self.x = random.uniform(-1,1)
+        self.y = random.uniform(-1,1)
+        self.z = random.uniform(-1,1)
+    def foo(self):
+        self.gameObject.translate(libGameEngine.Vector3(self.x, self.y, self.z))

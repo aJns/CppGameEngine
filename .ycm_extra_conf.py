@@ -91,6 +91,8 @@ flags = [
 '/usr/include/boost/python',
 '-isystem',
 '/usr/include/python3.4m',
+'-I',
+'./src/headers',
 '-isystem',
 '/usr/include'
 ]
