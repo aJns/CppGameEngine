@@ -1,0 +1,6 @@
+#ifndef QUATERNION_HH
+#define QUATERNION_HH
+
+
+
+#endif // QUATERNION_HH
