@@ -42,14 +42,14 @@ void GameEngine::GameObject::update() {
     }
 }
 
-std::shared_ptr<Ogre::Vector3> const GameEngine::GameObject::position() const {
-    return std::make_shared<Ogre::Vector3>(position_);
+std::shared_ptr<GameEngine::Vector3> const GameEngine::GameObject::position() const {
+    return std::make_shared<GameEngine::Vector3>(position_);
 }
 
-void GameEngine::GameObject::translate(Ogre::Vector3 const& vector) {
+void GameEngine::GameObject::translate(GameEngine::Vector3 const& vector) {
     position_ += vector;
 }
 
-void GameEngine::GameObject::moveTo(Ogre::Vector3 const& vector) {
+void GameEngine::GameObject::moveTo(GameEngine::Vector3 const& vector) {
     position_ = vector;
 }

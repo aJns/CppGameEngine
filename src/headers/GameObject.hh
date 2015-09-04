@@ -8,8 +8,10 @@
 #include <boost/python.hpp>
 
 // Ogre3D
-#include <OgreVector3.h>
 #include <OgreSceneManager.h>
+
+// GameEngine
+#include "Vector3.hh"
 
 
 namespace GameEngine {
@@ -24,11 +26,11 @@ namespace GameEngine {
         void addScriptComponent(std::string scriptName, 
                 boost::python::object& global);
         void update();
-        std::shared_ptr<Ogre::Vector3> const position() const;
-        void translate(Ogre::Vector3 const& vector);
-        void moveTo(Ogre::Vector3 const& vector);
+        std::shared_ptr<GameEngine::Vector3> const position() const;
+        void translate(GameEngine::Vector3 const& vector);
+        void moveTo(GameEngine::Vector3 const& vector);
     private:
-        Ogre::Vector3 position_;
+        GameEngine::Vector3 position_;
         GameEngine::GraphicsComponent* graphComp_;
         GameEngine::ScriptComponent* scriptComp_;
     };

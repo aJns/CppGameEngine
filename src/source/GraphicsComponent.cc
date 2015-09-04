@@ -21,5 +21,5 @@ GameEngine::GraphicsComponent::~GraphicsComponent() {
 }
 
 void GameEngine::GraphicsComponent::update() {
-    node_->setPosition(*owner_->position());
+    node_->setPosition(*owner_->position()->getOgreVector());
 }
