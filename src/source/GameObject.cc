@@ -12,7 +12,9 @@
 
 GameEngine::GameObject::GameObject()
     : position_(0,0,0),
-    graphComp_(nullptr)
+    orientation_(),
+    graphComp_(nullptr),
+    scriptComp_(nullptr)
 {}
 
 GameEngine::GameObject::~GameObject() {
@@ -40,6 +42,11 @@ void GameEngine::GameObject::update() {
     if (scriptComp_ != nullptr) {
         scriptComp_->update();
     }
+
+    GameEngine::Vector3 vector(.2, .4, .8);
+    vector.normalize();
+    GameEngine::Quaternion rotation(vector, 0.1);
+    rotate(rotation);
 }
 
 std::shared_ptr<GameEngine::Vector3> const GameEngine::GameObject::position() const {
@@ -52,4 +59,12 @@ void GameEngine::GameObject::translate(GameEngine::Vector3 const& vector) {
 
 void GameEngine::GameObject::moveTo(GameEngine::Vector3 const& vector) {
     position_ = vector;
+}
+
+std::shared_ptr<GameEngine::Quaternion> const GameEngine::GameObject::orientation() const {
+    return std::make_shared<GameEngine::Quaternion>(orientation_);
+}
+
+void GameEngine::GameObject::rotate(GameEngine::Quaternion const& rotation) {
+    orientation_ = rotation * orientation_;
 }

@@ -12,6 +12,7 @@
 
 // GameEngine
 #include "Vector3.hh"
+#include "Quaternion.hh"
 
 
 namespace GameEngine {
@@ -29,8 +30,11 @@ namespace GameEngine {
         std::shared_ptr<GameEngine::Vector3> const position() const;
         void translate(GameEngine::Vector3 const& vector);
         void moveTo(GameEngine::Vector3 const& vector);
+        std::shared_ptr<GameEngine::Quaternion> const orientation() const;
+        void rotate(GameEngine::Quaternion const& rotation);
     private:
         GameEngine::Vector3 position_;
+        GameEngine::Quaternion orientation_;
         GameEngine::GraphicsComponent* graphComp_;
         GameEngine::ScriptComponent* scriptComp_;
     };

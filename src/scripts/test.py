@@ -15,6 +15,9 @@ class testClass:
         x = random.uniform(-1,1)
         y = random.uniform(-1,1)
         z = random.uniform(-1,1)
+        x = 0
+        y = 0
+        z = 0
         self.vector = libGameEngine.Vector3(x, y, z)
     def foo(self):
         self.gameObject.translate(self.vector)

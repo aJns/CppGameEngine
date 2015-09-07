@@ -1,5 +1,6 @@
 // Ogre3D
 #include <OgreString.h>
+#include <OgreQuaternion.h>
 
 // GameEngine
 #include "Utils.hh"
@@ -25,4 +26,11 @@ void GameEngine::GraphicsComponent::update() {
     double y = owner_->position()->y;
     double z = owner_->position()->z;
     node_->setPosition(x, y, z);
+
+    double w = owner_->orientation()->w;
+    x = owner_->orientation()->x;
+    y = owner_->orientation()->y;
+    z = owner_->orientation()->z;
+    Ogre::Quaternion quat(w, x, y, z);
+    node_->setOrientation(quat);
 }
