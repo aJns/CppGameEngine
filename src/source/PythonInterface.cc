@@ -25,8 +25,10 @@ BOOST_PYTHON_MODULE(libGameEngine) {
     // GameEngine
     class_<GameEngine::GameObject, boost::noncopyable>("GameObject", no_init)
         .def("translate", &GameEngine::GameObject::translate)
-        .def("rotate", &GameEngine::GameObject::rotate);
+        .def("rotate", &GameEngine::GameObject::rotate)
+        .def("setOrientation", &GameEngine::GameObject::setOrientation);
     class_<GameEngine::Vector3>("Vector3", init<double, double, double>())
         .def("normalize", &GameEngine::Vector3::normalize);
-    class_<GameEngine::Quaternion>("Quaternion", init<GameEngine::Vector3, double>());
+    class_<GameEngine::Quaternion>("Quaternion", init<GameEngine::Vector3, double>())
+        .def(init<>());
 }

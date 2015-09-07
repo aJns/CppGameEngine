@@ -27,6 +27,14 @@ class testClass:
         rotVector.normalize()
         self.quaternion = libGameEngine.Quaternion(rotVector, radAngle)
 
+        self.counter = 0
+
     def foo(self):
+        print(self.counter)
+        if(self.counter > 150):
+            quat = libGameEngine.Quaternion()
+            self.gameObject.setOrientation(quat)
+            self.counter = 0
         self.gameObject.translate(self.vector)
         self.gameObject.rotate(self.quaternion)
+        self.counter += 1

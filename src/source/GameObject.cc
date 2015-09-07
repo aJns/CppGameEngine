@@ -67,3 +67,7 @@ void GameEngine::GameObject::rotate(GameEngine::Quaternion const& rotation) {
         orientation_.normalize();
     }
 }
+
+void GameEngine::GameObject::setOrientation(GameEngine::Quaternion const& orientation) {
+    orientation_ = orientation;
+}

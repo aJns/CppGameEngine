@@ -32,6 +32,7 @@ namespace GameEngine {
         void moveTo(GameEngine::Vector3 const& vector);
         std::shared_ptr<GameEngine::Quaternion> const orientation() const;
         void rotate(GameEngine::Quaternion const& rotation);
+        void setOrientation(GameEngine::Quaternion const& orientation);
     private:
         GameEngine::Vector3 position_;
         GameEngine::Quaternion orientation_;
