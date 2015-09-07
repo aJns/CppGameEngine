@@ -1,12 +1,6 @@
 #ifndef VECTOR3_HH
 #define VECTOR3_HH
 
-// std
-#include <memory>
-
-// Ogre3D
-#include <OgreVector3.h>
-
 
 namespace GameEngine {
     class Vector3 {
@@ -24,8 +18,6 @@ namespace GameEngine {
         // operators
         Vector3& operator = (const Vector3& rhs);
         Vector3& operator += (const Vector3& rhs);
-
-        std::shared_ptr<Ogre::Vector3> const getOgreVector();
     private:
     };
 }

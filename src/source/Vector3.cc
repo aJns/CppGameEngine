@@ -47,7 +47,3 @@ GameEngine::Vector3& GameEngine::Vector3::operator += (const GameEngine::Vector3
 
     return *this;
 }
-
-std::shared_ptr<Ogre::Vector3> const GameEngine::Vector3::getOgreVector() {
-    return std::make_shared<Ogre::Vector3>(x, y, z);
-}
