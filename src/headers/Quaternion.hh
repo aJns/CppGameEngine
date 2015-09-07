@@ -17,7 +17,7 @@ namespace GameEngine {
         Quaternion(double w, double x, double y, double z);
         Quaternion(GameEngine::Vector3 axis, double radAngle);
 
-        bool isUnit(double unitTolerance);
+        bool isUnit(double unitTolerance) const;
         void normalize();
         double magnitude();
 

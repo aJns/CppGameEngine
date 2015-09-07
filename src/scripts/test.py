@@ -19,5 +19,14 @@ class testClass:
         y = 0
         z = 0
         self.vector = libGameEngine.Vector3(x, y, z)
+        x = random.uniform(-1,1)
+        y = random.uniform(-1,1)
+        z = random.uniform(-1,1)
+        radAngle = 0.01
+        rotVector = libGameEngine.Vector3(x, y, z)
+        rotVector.normalize()
+        self.quaternion = libGameEngine.Quaternion(rotVector, radAngle)
+
     def foo(self):
         self.gameObject.translate(self.vector)
+        self.gameObject.rotate(self.quaternion)

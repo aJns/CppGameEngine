@@ -42,11 +42,6 @@ void GameEngine::GameObject::update() {
     if (scriptComp_ != nullptr) {
         scriptComp_->update();
     }
-
-    GameEngine::Vector3 vector(.2, .4, .8);
-    vector.normalize();
-    GameEngine::Quaternion rotation(vector, 0.1);
-    rotate(rotation);
 }
 
 std::shared_ptr<GameEngine::Vector3> const GameEngine::GameObject::position() const {
@@ -67,4 +62,8 @@ std::shared_ptr<GameEngine::Quaternion> const GameEngine::GameObject::orientatio
 
 void GameEngine::GameObject::rotate(GameEngine::Quaternion const& rotation) {
     orientation_ = rotation * orientation_;
+
+    if(!orientation_.isUnit(0.01)) {
+        orientation_.normalize();
+    }
 }
