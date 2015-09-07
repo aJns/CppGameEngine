@@ -11,10 +11,15 @@
 namespace GameEngine {
     class Vector3 {
     public:
-        Vector3(double x, double y, double z);
         double x;
         double y;
         double z;
+
+        Vector3(double x, double y, double z);
+
+        bool isUnit(double unitTolerance);
+        void normalize();
+        double magnitude();
 
         // operators
         Vector3& operator = (const Vector3& rhs);
