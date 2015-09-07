@@ -5,7 +5,14 @@
 namespace GameEngine {
     class Quaternion {
     public:
+        double w;
+        double x;
+        double y;
+        double z;
+
+        Quaternion();
     private:
+        void normalize(double unitTolerance);
     };
 }
 
