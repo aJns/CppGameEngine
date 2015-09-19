@@ -53,6 +53,7 @@ void GameEngine::Client::init() {
 
     gameLogic_ = new GameEngine::Logic(sceneMgr_);
     gameLogic_->setup(shutDown_);
+    gameLogic_->runInitScript("init_script");
     std::thread logicThread(GameEngine::gameLoop, std::ref(shutDown_),
             std::ref(*gameLogic_));
 

@@ -3,6 +3,7 @@
 
 // std
 #include <memory>
+#include <string>
 
 // Boost
 #include <boost/python.hpp>
@@ -23,6 +24,7 @@ namespace GameEngine {
     void setup(const bool& shutDown);
     void updateLogic();
     void processInput();
+    void runInitScript(std::string scriptName);
   private:
 
   private:
