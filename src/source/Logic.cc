@@ -19,7 +19,8 @@
 
 GameEngine::Logic::Logic(Ogre::SceneManager* sceneMgr) 
     : sceneMgr_(sceneMgr),
-    gameObject_(),
+    /* gameObject_(), */
+    objectVector_{},
     shutDown_(nullptr)
 {}
 
@@ -52,12 +53,19 @@ void GameEngine::Logic::setup(const bool& shutDown) {
         PyErr_Print();
     }
 
-    gameObject_.addGraphicsComponent(*sceneMgr_);
-    gameObject_.addScriptComponent("test", *pythonGlobal_);
+    /* gameObject_.addGraphicsComponent(*sceneMgr_); */
+    /* gameObject_.addScriptComponent("test", *pythonGlobal_); */
+
+    objectVector_.push_back(GameEngine::GameObject());
+    objectVector_.back().addGraphicsComponent(*sceneMgr_);
+    objectVector_.back().addScriptComponent("test", *pythonGlobal_);
 }
 
 void GameEngine::Logic::updateLogic() {
-    gameObject_.update();
+    /* gameObject_.update(); */
+    for (auto object : objectVector_) {
+        object.update();
+    }
 }
 
 void GameEngine::Logic::processInput() {
