@@ -13,7 +13,7 @@ GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject* owner,
     : Component(owner)
 {
     Ogre::Entity* ogreEntity = sceneMgr.createEntity("ogrehead.mesh");
-    node_ = sceneMgr.getRootSceneNode()->createChildSceneNode("TestNode");
+    node_ = sceneMgr.getRootSceneNode()->createChildSceneNode();
     node_->attachObject(ogreEntity);
 }
 

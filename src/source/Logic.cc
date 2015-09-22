@@ -58,6 +58,12 @@ void GameEngine::Logic::setup(const bool& shutDown) {
     objectVector_.push_back(new GameEngine::GameObject());
     objectVector_.back()->addGraphicsComponent(*sceneMgr_);
     objectVector_.back()->addScriptComponent("test", *pythonGlobal_);
+
+    objectVector_.push_back(new GameEngine::GameObject());
+    GameEngine::Vector3 vektori(50, 0, 0);
+    objectVector_.back()->translate(vektori);
+    objectVector_.back()->addGraphicsComponent(*sceneMgr_);
+    objectVector_.back()->addScriptComponent("test", *pythonGlobal_);
 }
 
 void GameEngine::Logic::updateLogic() {
