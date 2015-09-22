@@ -31,8 +31,7 @@ namespace GameEngine {
   private:
     std::shared_ptr<Ogre::SceneManager> sceneMgr_;
     std::shared_ptr<boost::python::object> pythonGlobal_;
-    /* GameEngine::GameObject gameObject_; */
-    std::vector<GameEngine::GameObject> objectVector_;
+    std::vector<GameEngine::GameObject*> objectVector_;
     
     const bool* shutDown_;
   };

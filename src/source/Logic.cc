@@ -19,12 +19,14 @@
 
 GameEngine::Logic::Logic(Ogre::SceneManager* sceneMgr) 
     : sceneMgr_(sceneMgr),
-    /* gameObject_(), */
     objectVector_{},
     shutDown_(nullptr)
 {}
 
 GameEngine::Logic::~Logic() {
+    for (auto object : objectVector_) {
+        delete object;
+    }
 }
 
 void GameEngine::Logic::runGameLoop() {
@@ -53,18 +55,14 @@ void GameEngine::Logic::setup(const bool& shutDown) {
         PyErr_Print();
     }
 
-    /* gameObject_.addGraphicsComponent(*sceneMgr_); */
-    /* gameObject_.addScriptComponent("test", *pythonGlobal_); */
-
-    objectVector_.push_back(GameEngine::GameObject());
-    objectVector_.back().addGraphicsComponent(*sceneMgr_);
-    objectVector_.back().addScriptComponent("test", *pythonGlobal_);
+    objectVector_.push_back(new GameEngine::GameObject());
+    objectVector_.back()->addGraphicsComponent(*sceneMgr_);
+    objectVector_.back()->addScriptComponent("test", *pythonGlobal_);
 }
 
 void GameEngine::Logic::updateLogic() {
-    /* gameObject_.update(); */
     for (auto object : objectVector_) {
-        object.update();
+        object->update();
     }
 }
 
