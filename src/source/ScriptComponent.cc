@@ -31,11 +31,12 @@ void GameEngine::ScriptComponent::update() {
         if(!script_.is_none()) {
             script_.attr("foo")();
         } else {
-            std::cout << "Script is null!" << std::endl;
+            std::cout << "Script is null! " << "GameObject: " << this <<
+                std::endl;
         }
     }
     catch(...) {
-        std::cout << "Python error!" << std::endl;
+        std::cout << "Python error! " << "GameObject: " << this << std::endl;
         PyErr_Print();
     }
 }

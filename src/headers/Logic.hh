@@ -3,6 +3,8 @@
 
 // std
 #include <memory>
+#include <string>
+#include <vector>
 
 // Boost
 #include <boost/python.hpp>
@@ -23,12 +25,13 @@ namespace GameEngine {
     void setup(const bool& shutDown);
     void updateLogic();
     void processInput();
+    void runInitScript(std::string scriptName);
   private:
 
   private:
     std::shared_ptr<Ogre::SceneManager> sceneMgr_;
     std::shared_ptr<boost::python::object> pythonGlobal_;
-    GameEngine::GameObject gameObject_;
+    std::vector<GameEngine::GameObject*> objectVector_;
     
     const bool* shutDown_;
   };

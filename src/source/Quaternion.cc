@@ -20,7 +20,7 @@ GameEngine::Quaternion::Quaternion(GameEngine::Vector3 unitAxis, double radAngle
     z = unitAxis.z * std::sin(radAngle/2);
 }
 
-bool GameEngine::Quaternion::isUnit(double unitTolerance) {
+bool GameEngine::Quaternion::isUnit(double unitTolerance) const {
     double w2 = w*w;
     double x2 = x*x;
     double y2 = y*y;
