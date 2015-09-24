@@ -3,26 +3,6 @@
 #ifndef CLIENT_HH
 #define CLIENT_HH
 
-// Ogre3D
-#include <OgreCamera.h>
-#include <OgreEntity.h>
-#include <OgreLogManager.h>
-#include <OgreRoot.h>
-#include <OgreViewport.h>
-#include <OgreSceneManager.h>
-#include <OgreRenderWindow.h>
-#include <OgreConfigFile.h>
-
-// OIS
-#include <OISEvents.h>
-#include <OISInputManager.h>
-#include <OISKeyboard.h>
-#include <OISMouse.h>
-
-// OgreSDK
-#include <SdkTrays.h>
-#include <SdkCameraMan.h>
-
 // std
 #include <memory>
 

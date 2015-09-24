@@ -1,9 +1,12 @@
 #ifndef COMPONENT_HH
 #define COMPONENT_HH
 
+// std
 #include <memory>
 
+// GameEngine
 #include "GameObject.hh"
+
 
 namespace GameEngine {
     class Component

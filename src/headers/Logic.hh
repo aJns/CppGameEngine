@@ -9,9 +9,6 @@
 // Boost
 #include <boost/python.hpp>
 
-// Ogre3D
-#include <OgreSceneManager.h>
-
 // GameEngine
 #include "GameObject.hh"
 

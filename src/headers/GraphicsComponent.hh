@@ -1,11 +1,6 @@
 #ifndef GRAPHICSCOMPONENT_HH
 #define GRAPHICSCOMPONENT_HH
 
-// Ogre3D
-#include <OgreSceneManager.h>
-#include <OgreSceneNode.h>
-#include <OgreEntity.h>
-
 // GameEngine
 #include "Component.hh"
 #include "GameObject.hh"

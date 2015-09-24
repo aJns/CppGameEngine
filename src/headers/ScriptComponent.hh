@@ -11,6 +11,7 @@
 #include "Component.hh"
 #include "GameObject.hh"
 
+
 namespace GameEngine {
     class ScriptComponent : public GameEngine::Component
     {

@@ -1,9 +1,12 @@
 #ifndef SERVER_HH
 #define SERVER_HH
 
+// std
 #include <vector>
 
+// GameEngine
 #include "Client.hh"
+
 
 namespace GameEngine {
     class Server

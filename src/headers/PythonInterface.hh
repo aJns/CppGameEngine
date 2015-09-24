@@ -4,9 +4,6 @@
 // Boost
 #include <boost/shared_ptr.hpp>
 
-// Ogre
-#include <OgreVector3.h>
-
 
 namespace GameEngine {
     namespace python {
