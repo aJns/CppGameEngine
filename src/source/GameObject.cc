@@ -26,8 +26,8 @@ GameEngine::GameObject::~GameObject() {
     }
 }
 
-void GameEngine::GameObject::addGraphicsComponent(Ogre::SceneManager& sceneMgr) {
-    graphComp_ = new GameEngine::GraphicsComponent(this, sceneMgr);
+void GameEngine::GameObject::addGraphicsComponent() {
+    graphComp_ = new GameEngine::GraphicsComponent(this);
 }
 
 void GameEngine::GameObject::addScriptComponent(std::string scriptName, 

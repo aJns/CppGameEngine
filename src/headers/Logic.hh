@@ -16,17 +16,15 @@ namespace GameEngine {
   class Logic
   {
   public:
-    Logic(Ogre::SceneManager* sceneMgr);
+    Logic();
     ~Logic();
     void runGameLoop();
     void setup(const bool& shutDown);
     void updateLogic();
     void processInput();
     void runInitScript(std::string scriptName);
-  private:
 
   private:
-    std::shared_ptr<Ogre::SceneManager> sceneMgr_;
     std::shared_ptr<boost::python::object> pythonGlobal_;
     std::vector<GameEngine::GameObject*> objectVector_;
     

@@ -1,31 +1,31 @@
+// std
+#include <thread>
+
+// Magnum
+#include <Magnum/DefaultFramebuffer.h>
+
 // GameEngine
 #include "GraphicsComponent.hh"
 #include "GameLoop.hh"
-
-// std
-#include <thread>
 
 
 #include "Application.hh"
 
 
-GameEngine::Application::Application()
-    : root_(0),
-    camera_(0),
-    sceneMgr_(0),
-    window_(0),
-    resourcesCfg_(Ogre::StringUtil::BLANK),
-    pluginsCfg_(Ogre::StringUtil::BLANK),
-    trayMgr_(0),
-    cameraMan_(0),
-    detailsPanel_(0),
-    cursorWasVisible_(false),
-    shutDown_(false),
-    inputManager_(0),
-    mouse_(0),
-    keyboard_(0),
+GameEngine::Application::Application(const Arguments& arguments)
+    : Magnum::Platform::Application{arguments},
     gameLogic_(nullptr)
 {
+    using namespace Magnum;
+    /* Configure camera */
+    cameraObject_ = new Magnum::SceneGraph::Object<Magnum::SceneGraph::MatrixTransformation3D>{&scene_};
+    cameraObject_->translate(Magnum::Vector3::zAxis(5.0f));
+    camera_ = new Magnum::SceneGraph::Camera3D{*cameraObject_};
+    camera_->setAspectRatioPolicy(Magnum::SceneGraph::AspectRatioPolicy::Extend)
+        .setProjectionMatrix(Magnum::Matrix4::perspectiveProjection(35.0_degf, 4.0f/3.0f, 0.001f, 100.0f))
+        .setViewport(Magnum::defaultFramebuffer.viewport().size());
+
+    /* TODO: Prepare your objects here and add them to the scene */
 }
 
 GameEngine::Application::~Application() {
@@ -34,7 +34,7 @@ GameEngine::Application::~Application() {
 
 void GameEngine::Application::init() {
     bool shutdown = false;
-    gameLogic_ = new GameEngine::Logic(sceneMgr_);
+    gameLogic_ = new GameEngine::Logic();
     gameLogic_->setup(shutdown);
     gameLogic_->runInitScript("init_script");
     std::thread logicThread(GameEngine::gameLoop, std::ref(shutdown),

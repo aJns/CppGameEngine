@@ -1,3 +1,7 @@
+// std
+#include <iostream>
+
+
 #include "ScriptComponent.hh"
 
 

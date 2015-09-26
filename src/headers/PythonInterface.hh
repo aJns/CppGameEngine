@@ -7,9 +7,6 @@
 
 namespace GameEngine {
     namespace python {
-        boost::shared_ptr<Ogre::Vector3> createVector(double x, double y,
-                double z);
-        void testFunc();
     }
 }
 

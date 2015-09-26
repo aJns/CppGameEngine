@@ -6,8 +6,6 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
 
-// Ogre3D
-
 // GameEngine
 #include "GameObject.hh"
 #include "Vector3.hh"

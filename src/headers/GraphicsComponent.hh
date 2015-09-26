@@ -10,12 +10,11 @@ namespace GameEngine {
     class GraphicsComponent : public GameEngine::Component 
     {
     public:
-        GraphicsComponent(GameEngine::GameObject* owner, 
-                Ogre::SceneManager& sceneMgr);
+        GraphicsComponent(GameEngine::GameObject* owner);
         virtual ~GraphicsComponent();
         virtual void update();
     private:
-        Ogre::SceneNode* node_;
+        /* Ogre::SceneNode* node_; */
     };
 }
 

@@ -20,7 +20,7 @@ namespace GameEngine {
     public:
         GameObject();
         ~GameObject();
-        void addGraphicsComponent(Ogre::SceneManager& sceneMgr);
+        void addGraphicsComponent();
         void addScriptComponent(std::string scriptName, 
                 boost::python::object& global);
         void update();
