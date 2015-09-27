@@ -42,3 +42,11 @@ void GameEngine::Application::init() {
 
     logicThread.join();
 }
+
+void GameEngine::Application::drawEvent() {
+    Magnum::defaultFramebuffer.clear(Magnum::FramebufferClear::Color);
+
+    camera_->draw(drawables_);
+
+    swapBuffers();
+}

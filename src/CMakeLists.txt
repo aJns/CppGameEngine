@@ -18,11 +18,11 @@ set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib )
 
 # Set source files
 file(GLOB HDRS
-    "./headers/*"
+    "./*"
     )
 
 file(GLOB SRCS
-    "./source/*"
+    "./*"
     )
 
 include_directories( 
@@ -30,10 +30,10 @@ include_directories(
     ${PYTHON_INCLUDE_DIRS}
     ${MAGNUM_INCLUDE_DIRS} 
     ${MAGNUM_APPLICATION_INCLUDE_DIRS}
-    ./headers
+    ${HDRS}
     )
 
-add_executable(GameEngineTest WIN32 ./main.cc )
+add_executable(GameEngineTest WIN32 ${HDRS} ${SRCS})
 
 target_compile_features(GameEngineTest PRIVATE cxx_range_for)
 
@@ -44,22 +44,23 @@ target_link_libraries(GameEngineTest
     ${MAGNUM_LIBRARIES}
     ${MAGNUM_SCENEGRAPH_LIBRARIES}
     ${MAGNUM_APPLICATION_LIBRARIES}
-    /home/nikulaj/projects/GameEngine/build/lib/libGameEngine.so
+    # /home/nikulaj/projects/GameEngine/build/lib/libGameEngine.so
     )
 
-add_library( GameEngine SHARED ${HDRS} ${SRCS} )
+#   add_library( GameEngine SHARED ${HDRS} ${SRCS} )
+#
+#   target_link_libraries(GameEngine 
+#       ${CMAKE_THREAD_LIBS_INIT}
+#       ${Boost_LIBRARIES}
+#       ${PYTHON_LIBRARIES}
+#       ${MAGNUM_LIBRARIES}
+#       ${MAGNUM_SCENEGRAPH_LIBRARIES}
+#       ${MAGNUM_APPLICATION_LIBRARIES}
+#       )
+#
+#   target_compile_features(GameEngine PRIVATE cxx_range_for)
 
-target_link_libraries(GameEngine 
-    ${CMAKE_THREAD_LIBS_INIT}
-    ${Boost_LIBRARIES}
-    ${PYTHON_LIBRARIES}
-    ${MAGNUM_LIBRARIES}
-    ${MAGNUM_SCENEGRAPH_LIBRARIES}
-    ${MAGNUM_APPLICATION_LIBRARIES}
-    )
-
-target_compile_features(GameEngine PRIVATE cxx_range_for)
-
+set_target_properties(${LIBRARY_NAME} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 
 # Export compile commands for vim's YCM
