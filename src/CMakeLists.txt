@@ -12,7 +12,7 @@ find_package(PythonLibs REQUIRED)
 
 find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} python3)
 
-set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/dist/bin )
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin )
 set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib )
 set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib )
 
@@ -30,7 +30,7 @@ include_directories(
     ${PYTHON_INCLUDE_DIRS}
     ${MAGNUM_INCLUDE_DIRS} 
     ${MAGNUM_APPLICATION_INCLUDE_DIRS}
-    ${HDRS}
+    ./      # So python interface can find it.
     )
 
 add_executable(GameEngineTest WIN32 ${HDRS} ${SRCS})
@@ -47,20 +47,20 @@ target_link_libraries(GameEngineTest
     # /home/nikulaj/projects/GameEngine/build/lib/libGameEngine.so
     )
 
-#   add_library( GameEngine SHARED ${HDRS} ${SRCS} )
-#
-#   target_link_libraries(GameEngine 
-#       ${CMAKE_THREAD_LIBS_INIT}
-#       ${Boost_LIBRARIES}
-#       ${PYTHON_LIBRARIES}
-#       ${MAGNUM_LIBRARIES}
-#       ${MAGNUM_SCENEGRAPH_LIBRARIES}
-#       ${MAGNUM_APPLICATION_LIBRARIES}
-#       )
-#
-#   target_compile_features(GameEngine PRIVATE cxx_range_for)
+add_library( GameEngine SHARED ./python/PythonInterface.hh ./python/PythonInterface.cc )
 
-set_target_properties(${LIBRARY_NAME} PROPERTIES POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(GameEngine 
+      ${CMAKE_THREAD_LIBS_INIT}
+      ${Boost_LIBRARIES}
+      ${PYTHON_LIBRARIES}
+      ${MAGNUM_LIBRARIES}
+      ${MAGNUM_SCENEGRAPH_LIBRARIES}
+      ${MAGNUM_APPLICATION_LIBRARIES}
+      )
+
+target_compile_features(GameEngine PRIVATE cxx_range_for)
+
+# set_target_properties(${LIBRARY_NAME} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 
 # Export compile commands for vim's YCM
