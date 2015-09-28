@@ -12,13 +12,12 @@
 #include "Application.hh"
 
 
-using Magnum::operator "" _degf;
-
 GameEngine::Application::Application(const Arguments& arguments)
     : Magnum::Platform::Application{arguments},
     gameLogic_(nullptr)
 {
-    /* using namespace Magnum; */
+    using Magnum::operator "" _degf;
+
     /* Configure camera */
     cameraObject_ = new Magnum::SceneGraph::Object<Magnum::SceneGraph::MatrixTransformation3D>{&scene_};
     cameraObject_->translate(Magnum::Vector3::zAxis(5.0f));
@@ -34,7 +33,7 @@ GameEngine::Application::~Application() {
     if (gameLogic_) delete gameLogic_;
 }
 
-void GameEngine::Application::init() {
+void GameEngine::Application::initLogic() {
     bool shutdown = false;
     gameLogic_ = new GameEngine::Logic();
     gameLogic_->setup(shutdown);

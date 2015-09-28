@@ -21,7 +21,7 @@ namespace GameEngine {
         explicit Application(const Arguments& arguments);
         virtual ~Application();
 
-        void init();
+        void initLogic();
 
     private:
         GameEngine::Logic* gameLogic_;

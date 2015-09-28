@@ -3,14 +3,29 @@ find_package(Magnum REQUIRED
     Sdl2Application)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CORRADE_CXX_FLAGS}")
-include_directories(
-    )
 
 find_package (Threads)
 
 find_package(PythonLibs REQUIRED)
 
-find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} python3)
+find_package(Boost COMPONENTS python3)
+
+include_directories( 
+    ${Boost_INCLUDE_DIRS}
+    ${PYTHON_INCLUDE_DIRS}
+    ${MAGNUM_INCLUDE_DIRS} 
+    ${MAGNUM_APPLICATION_INCLUDE_DIRS}
+    ./      # So python interface can find it.
+    )
+
+set( LINKED_LIBS 
+    ${CMAKE_THREAD_LIBS_INIT}
+    ${Boost_LIBRARIES}
+    ${PYTHON_LIBRARIES}
+    ${MAGNUM_LIBRARIES}
+    ${MAGNUM_SCENEGRAPH_LIBRARIES}
+    ${MAGNUM_APPLICATION_LIBRARIES}
+    )
 
 set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin )
 set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib )
@@ -25,37 +40,20 @@ file(GLOB SRCS
     "./*"
     )
 
-include_directories( 
-    ${Boost_INCLUDE_DIRS}
-    ${PYTHON_INCLUDE_DIRS}
-    ${MAGNUM_INCLUDE_DIRS} 
-    ${MAGNUM_APPLICATION_INCLUDE_DIRS}
-    ./      # So python interface can find it.
-    )
-
 add_executable(GameEngineTest WIN32 ${HDRS} ${SRCS})
 
 target_compile_features(GameEngineTest PRIVATE cxx_range_for)
 
 target_link_libraries(GameEngineTest 
-    ${CMAKE_THREAD_LIBS_INIT}
-    ${Boost_LIBRARIES}
-    ${PYTHON_LIBRARIES}
-    ${MAGNUM_LIBRARIES}
-    ${MAGNUM_SCENEGRAPH_LIBRARIES}
-    ${MAGNUM_APPLICATION_LIBRARIES}
-    # /home/nikulaj/projects/GameEngine/build/lib/libGameEngine.so
+    ${LINKED_LIBS}
     )
 
-add_library( GameEngine SHARED ./python/PythonInterface.hh ./python/PythonInterface.cc )
+add_library( GameEngine SHARED
+    ./python/PythonInterface.hh
+    ./python/PythonInterface.cc )
 
 target_link_libraries(GameEngine 
-      ${CMAKE_THREAD_LIBS_INIT}
-      ${Boost_LIBRARIES}
-      ${PYTHON_LIBRARIES}
-      ${MAGNUM_LIBRARIES}
-      ${MAGNUM_SCENEGRAPH_LIBRARIES}
-      ${MAGNUM_APPLICATION_LIBRARIES}
+    ${LINKED_LIBS}
       )
 
 target_compile_features(GameEngine PRIVATE cxx_range_for)
