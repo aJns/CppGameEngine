@@ -1,4 +1,6 @@
 find_package(Magnum REQUIRED
+    MeshTools
+    Shaders
     SceneGraph
     Sdl2Application)
 
@@ -15,6 +17,7 @@ include_directories(
     ${PYTHON_INCLUDE_DIRS}
     ${MAGNUM_INCLUDE_DIRS} 
     ${MAGNUM_APPLICATION_INCLUDE_DIRS}
+    ${CMAKE_CURRENT_BINARY_DIR}
     ./      # So python interface can find it.
     )
 
@@ -23,6 +26,8 @@ set( LINKED_LIBS
     ${Boost_LIBRARIES}
     ${PYTHON_LIBRARIES}
     ${MAGNUM_LIBRARIES}
+    ${MAGNUM_MESHTOOLS_LIBRARIES}
+    ${MAGNUM_SHADERS_LIBRARIES}
     ${MAGNUM_SCENEGRAPH_LIBRARIES}
     ${MAGNUM_APPLICATION_LIBRARIES}
     )
@@ -54,7 +59,7 @@ add_library( GameEngine SHARED
 
 target_link_libraries(GameEngine 
     ${LINKED_LIBS}
-      )
+    )
 
 target_compile_features(GameEngine PRIVATE cxx_range_for)
 
