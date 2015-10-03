@@ -1,0 +1,7 @@
+#ifdef CORRADE_IS_DEBUG_BUILD
+#define MAGNUM_PLUGINS_IMPORTER_DIR "${MAGNUM_PLUGINS_IMPORTER_DEBUG_DIR}"
+#else
+/* #define MAGNUM_PLUGINS_IMPORTER_DIR "${MAGNUM_PLUGINS_IMPORTER_DIR}" */
+// this is a dirty hack
+#define MAGNUM_PLUGINS_IMPORTER_DIR "/lib/magnum-d/importers"
+#endif
