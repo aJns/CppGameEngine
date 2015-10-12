@@ -34,7 +34,6 @@
 
 // GameEngine
 #include "Logic.hh"
-#include "ApplicationInterface.hh"
 
 
 // Mostly copied from Magnum example viewer. Code could and probably should be
@@ -48,12 +47,12 @@ namespace GameEngine {
     typedef SceneGraph::Object<SceneGraph::MatrixTransformation3D> Object3D;
     typedef SceneGraph::Scene<SceneGraph::MatrixTransformation3D> Scene3D;
 
-    class Application : public Platform::Application, public GameEngine::ApplicationInterface {
+    class Application : public Platform::Application {
     public:
         explicit Application(const Arguments& arguments);
         ~Application();
 
-        void initLogic() override;
+        void initLogic();
     private:
         GameEngine::Logic* gameLogic_;
 
