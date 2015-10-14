@@ -27,12 +27,12 @@ GameEngine::GameObject::~GameObject() {
 }
 
 void GameEngine::GameObject::addGraphicsComponent() {
-    graphComp_ = new GameEngine::GraphicsComponent(this);
+    /* graphComp_ = new GameEngine::GraphicsComponent(this); */
 }
 
 void GameEngine::GameObject::addScriptComponent(std::string scriptName, 
         boost::python::object& global) {
-    scriptComp_ = new GameEngine::ScriptComponent(this, scriptName, global);
+    scriptComp_ = new GameEngine::ScriptComponent(*this, scriptName, global);
 }
 
 void GameEngine::GameObject::update() {

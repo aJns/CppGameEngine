@@ -12,7 +12,7 @@ namespace GameEngine {
     class Component
     {
     public:
-        Component(GameEngine::GameObject* owner);
+        Component(GameEngine::GameObject& owner);
         virtual ~Component();
         virtual void update();
     protected:

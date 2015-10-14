@@ -1,5 +1,6 @@
-// std
-#include <memory>
+#ifndef MODELLOADER_HH
+#define MODELLOADER_HH
+
 
 // Magnum
 #include <Corrade/PluginManager/Manager.h>
@@ -16,7 +17,7 @@
 #include <Magnum/Platform/Sdl2Application.h>
 #include <Magnum/SceneGraph/Camera.h>
 #include <Magnum/SceneGraph/Drawable.h>
-#include <Magnum/SceneGraph/MatrixTransformation3D.h>
+#include <Magnum/SceneGraph/DualQuaternionTransformation.h>
 #include <Magnum/SceneGraph/Scene.h>
 #include <Magnum/Shaders/Phong.h>
 #include <Magnum/Trade/AbstractImporter.h>
@@ -35,10 +36,10 @@ namespace GameEngine {
             Magnum::Texture2D, Magnum::Shaders::Phong,
             Magnum::Trade::PhongMaterialData> ViewerResourceManager;
     typedef
-        Magnum::SceneGraph::Object<Magnum::SceneGraph::MatrixTransformation3D>
+        Magnum::SceneGraph::Object<Magnum::SceneGraph::DualQuaternionTransformation>
         Object3D;
     typedef
-        Magnum::SceneGraph::Scene<Magnum::SceneGraph::MatrixTransformation3D>
+        Magnum::SceneGraph::Scene<Magnum::SceneGraph::DualQuaternionTransformation>
         Scene3D;
 
 
@@ -53,3 +54,6 @@ namespace GameEngine {
         Magnum::SceneGraph::DrawableGroup3D* drawables_;
     };
 }
+
+
+#endif

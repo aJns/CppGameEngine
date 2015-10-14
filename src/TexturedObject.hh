@@ -2,7 +2,7 @@
 #define TEXTUREDOBJECT_HH
 
 
-#include <Magnum/SceneGraph/MatrixTransformation3D.h>
+#include <Magnum/SceneGraph/DualQuaternionTransformation.h>
 #include <Magnum/SceneGraph/Drawable.h>
 #include <Magnum/Shaders/Phong.h>
 #include <Magnum/Resource.h>
@@ -11,11 +11,13 @@
 
 using namespace Magnum;
 
-typedef SceneGraph::Object<SceneGraph::MatrixTransformation3D> Object3D;
+typedef SceneGraph::Object<SceneGraph::DualQuaternionTransformation> Object3D;
 
 class TexturedObject: public Object3D, SceneGraph::Drawable3D {
 public:
-    explicit TexturedObject(ResourceKey meshId, ResourceKey materialId, ResourceKey diffuseTextureId, Object3D* parent, SceneGraph::DrawableGroup3D* group);
+    explicit TexturedObject(ResourceKey meshId, ResourceKey materialId,
+            ResourceKey diffuseTextureId, Object3D* parent,
+            SceneGraph::DrawableGroup3D* group);
 private:
     void draw(const Matrix4& transformationMatrix, SceneGraph::Camera3D& camera) override;
     Resource<Mesh> _mesh;

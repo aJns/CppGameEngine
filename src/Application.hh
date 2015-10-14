@@ -43,9 +43,15 @@
 using namespace Magnum;
 
 namespace GameEngine {
-    typedef ResourceManager<Buffer, Mesh, Texture2D, Shaders::Phong, Trade::PhongMaterialData> ViewerResourceManager;
-    typedef SceneGraph::Object<SceneGraph::MatrixTransformation3D> Object3D;
-    typedef SceneGraph::Scene<SceneGraph::MatrixTransformation3D> Scene3D;
+    typedef Magnum::ResourceManager<Magnum::Buffer, Magnum::Mesh,
+            Magnum::Texture2D, Magnum::Shaders::Phong,
+            Magnum::Trade::PhongMaterialData> ViewerResourceManager;
+    typedef
+        Magnum::SceneGraph::Object<Magnum::SceneGraph::DualQuaternionTransformation>
+        Object3D;
+    typedef
+        Magnum::SceneGraph::Scene<Magnum::SceneGraph::DualQuaternionTransformation>
+        Scene3D;
 
     class Application : public Platform::Application {
     public:
