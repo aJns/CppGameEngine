@@ -1,3 +1,6 @@
+// std
+#include <memory>
+
 // Magnum
 #include <Corrade/PluginManager/Manager.h>
 #include <Corrade/Utility/Arguments.h>
@@ -41,11 +44,12 @@ namespace GameEngine {
 
     class ModelLoader {
     public:
-        explicit ModelLoader();
-    private:
+        explicit ModelLoader(ViewerResourceManager& resourceManager_,
+                Magnum::SceneGraph::DrawableGroup3D& drawables);
         void addObject(Magnum::Trade::AbstractImporter& importer, Object3D*
                 parent, Magnum::UnsignedInt i);
-        ViewerResourceManager _resourceManager;
-        Magnum::SceneGraph::DrawableGroup3D _drawables;
+    private:
+        ViewerResourceManager* resourceManager_;
+        Magnum::SceneGraph::DrawableGroup3D* drawables_;
     };
 }

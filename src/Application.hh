@@ -58,7 +58,6 @@ namespace GameEngine {
 
         void viewportEvent(const Vector2i& size) override;
         void drawEvent() override;
-        void addObject(Trade::AbstractImporter& importer, Object3D* parent, UnsignedInt i);
         ViewerResourceManager _resourceManager;
         Scene3D _scene;
         Object3D *_o, *_cameraObject;
