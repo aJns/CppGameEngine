@@ -16,9 +16,10 @@
 
 
 GameEngine::Logic::Logic() 
-    : objectVector_{},
-    shutDown_(nullptr)
-{}
+    : objectVector_{}
+{
+
+}
 
 GameEngine::Logic::~Logic() {
     for (auto object : objectVector_) {
@@ -26,17 +27,7 @@ GameEngine::Logic::~Logic() {
     }
 }
 
-void GameEngine::Logic::runGameLoop() {
-    if(shutDown_ == nullptr) {
-        return;
-    }
-
-    GameEngine::visibleMsg("running loop...");
-}
-
-void GameEngine::Logic::setup(const bool& shutDown) {
-    shutDown_ = &shutDown;
-
+void GameEngine::Logic::setup() {
     Py_Initialize();
     std::cout << "Using Python " << Py_GetVersion() << std::endl;
     
@@ -44,23 +35,13 @@ void GameEngine::Logic::setup(const bool& shutDown) {
         // Create the python environment
         boost::python::object main = boost::python::import("__main__");
         /* boost::python::object global(main.attr("__dict__")); */
-        pythonGlobal_ = std::make_shared<boost::python::object>(main.attr("__dict__"));
+        pythonGlobal_= new boost::python::object(main.attr("__dict__"));
     }
     catch(...) {
         std::cout << "Python error! " << "Couldn't setup Python environment!"
             << std::endl;
         PyErr_Print();
     }
-
-    objectVector_.push_back(new GameEngine::GameObject());
-    /* objectVector_.back()->addGraphicsComponent(*sceneMgr_); */
-    objectVector_.back()->addScriptComponent("test", *pythonGlobal_);
-
-    objectVector_.push_back(new GameEngine::GameObject());
-    GameEngine::Vector3 vektori(50, 0, 0);
-    objectVector_.back()->translate(vektori);
-    /* objectVector_.back()->addGraphicsComponent(*sceneMgr_); */
-    objectVector_.back()->addScriptComponent("test", *pythonGlobal_);
 }
 
 void GameEngine::Logic::updateLogic() {
@@ -79,10 +60,11 @@ void GameEngine::Logic::runInitScript(std::string scriptName) {
         filename.append(".py");
 
         boost::python::str filenameStr(filename);
-        boost::python::object result =
-            boost::python::exec_file(filenameStr, *pythonGlobal_, *pythonGlobal_);
+        boost::python::object result = boost::python::exec_file(filenameStr,
+                *pythonGlobal_, *pythonGlobal_);
         boost::python::object init = (*pythonGlobal_)["init"];
-        init(boost::ref(*this));
+        /* init(boost::ref(*this)); */
+        init();
     }
     catch(...) {
         std::cout << "Python error!" << std::endl;

@@ -18,17 +18,15 @@ namespace GameEngine {
   public:
     Logic();
     ~Logic();
-    void runGameLoop();
-    void setup(const bool& shutDown);
+    void setup();
     void updateLogic();
     void processInput();
     void runInitScript(std::string scriptName);
 
   private:
-    std::shared_ptr<boost::python::object> pythonGlobal_;
+    /* std::shared_ptr<boost::python::object> pythonGlobal_; */
+    boost::python::object* pythonGlobal_;
     std::vector<GameEngine::GameObject*> objectVector_;
-    
-    const bool* shutDown_;
   };
 }
 
