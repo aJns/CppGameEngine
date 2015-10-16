@@ -18,16 +18,6 @@
 GameEngine::Logic::Logic() 
     : objectVector_{}
 {
-
-}
-
-GameEngine::Logic::~Logic() {
-    for (auto object : objectVector_) {
-        delete object;
-    }
-}
-
-void GameEngine::Logic::setup() {
     Py_Initialize();
     std::cout << "Using Python " << Py_GetVersion() << std::endl;
     
@@ -42,6 +32,15 @@ void GameEngine::Logic::setup() {
             << std::endl;
         PyErr_Print();
     }
+}
+
+GameEngine::Logic::~Logic() {
+    for (auto object : objectVector_) {
+        delete object;
+    }
+}
+
+void GameEngine::Logic::setup() {
 }
 
 void GameEngine::Logic::updateLogic() {

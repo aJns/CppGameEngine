@@ -12,6 +12,7 @@
 // GameEngine
 #include "GameObject.hh"
 
+
 namespace GameEngine {
   class Logic
   {
@@ -29,5 +30,6 @@ namespace GameEngine {
     std::vector<GameEngine::GameObject*> objectVector_;
   };
 }
+
 
 #endif // LOGIC_HH
