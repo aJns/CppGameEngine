@@ -35,7 +35,7 @@ void GameEngine::ModelLoader::addObject(Magnum::Trade::AbstractImporter& importe
             object = new ColoredObject(ResourceKey(objectData->instance()),
                     ResourceKey(materialId),
                     parent, drawables_);
-            /* object->setTransformation(objectData->transformation()); */
+            object->setTransformation(objectData->transformation());
 
             /* Diffuse texture material */
         } else if(materialData->flags() == Trade::PhongMaterialData::Flag::DiffuseTexture) {
@@ -43,7 +43,7 @@ void GameEngine::ModelLoader::addObject(Magnum::Trade::AbstractImporter& importe
                     ResourceKey(materialId),
                     ResourceKey(materialData->diffuseTexture()),
                     parent, drawables_);
-            /* object->setTransformation(objectData->transformation()); */
+            object->setTransformation(objectData->transformation());
 
             /* No other material types are supported yet */
         } else {
@@ -53,7 +53,7 @@ void GameEngine::ModelLoader::addObject(Magnum::Trade::AbstractImporter& importe
             object = new ColoredObject(ResourceKey(objectData->instance()),
                     ResourceKey(-1),
                     parent, drawables_);
-            /* object->setTransformation(objectData->transformation()); */
+            object->setTransformation(objectData->transformation());
         }
     }
     /* Create parent object for children, if it doesn't already exist */

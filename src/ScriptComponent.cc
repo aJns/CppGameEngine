@@ -5,7 +5,7 @@
 #include "ScriptComponent.hh"
 
 
-GameEngine::ScriptComponent::ScriptComponent(GameEngine::GameObject& owner,
+GameEngine::ScriptComponent::ScriptComponent(GameEngine::GameObject* owner,
         std::string scriptName, boost::python::object global)
     : Component(owner)
 {
@@ -18,7 +18,7 @@ GameEngine::ScriptComponent::ScriptComponent(GameEngine::GameObject& owner,
         boost::python::object result =
             boost::python::exec_file(filenameStr, global, global);
         boost::python::object testClass = global["test"];
-        script_ = testClass(boost::ref(owner));
+        script_ = testClass(boost::ref(*owner));
     }
     catch(...) {
         std::cout << "Python error!" << std::endl;

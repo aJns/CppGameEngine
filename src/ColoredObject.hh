@@ -2,7 +2,7 @@
 #define COLOREDOBJECT_HH
 
 
-#include <Magnum/SceneGraph/DualQuaternionTransformation.h>
+#include <Magnum/SceneGraph/MatrixTransformation3D.h>
 #include <Magnum/SceneGraph/Drawable.h>
 #include <Magnum/Shaders/Phong.h>
 #include <Magnum/Resource.h>
@@ -11,7 +11,7 @@
 
 using namespace Magnum;
 
-typedef SceneGraph::Object<SceneGraph::DualQuaternionTransformation> Object3D;
+typedef SceneGraph::Object<SceneGraph::MatrixTransformation3D> Object3D;
 
 class ColoredObject: public Object3D, SceneGraph::Drawable3D {
 public:

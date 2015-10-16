@@ -4,19 +4,17 @@
 // GameEngine
 #include "Component.hh"
 #include "GameObject.hh"
-#include "ModelLoader.hh"
 
 
 namespace GameEngine {
     class GraphicsComponent : public GameEngine::Component 
     {
     public:
-        GraphicsComponent(GameEngine::GameObject& owner,
-                GameEngine::Object3D& magnumObject);
+        GraphicsComponent(GameEngine::GameObject* owner);
         virtual ~GraphicsComponent();
         virtual void update();
     private:
-        GameEngine::Object3D* magnumObject_;
+        /* Ogre::SceneNode* node_; */
     };
 }
 

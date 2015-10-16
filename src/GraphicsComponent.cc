@@ -1,7 +1,3 @@
-// Magnum
-#include "Magnum/SceneGraph/SceneGraph.h"
-#include "Magnum/SceneGraph/Object.h"
-
 // GameEngine
 #include "Utils.hh"
 
@@ -9,22 +5,23 @@
 #include "GraphicsComponent.hh"
 
 
-GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject& owner,
-        GameEngine::Object3D& magnumObject)
-    : Component(owner),
-    magnumObject_(&magnumObject)
+GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject* owner)
+    : Component(owner)
 {
+    /* Ogre::Entity* ogreEntity = sceneMgr.createEntity("ogrehead.mesh"); */
+    /* node_ = sceneMgr.getRootSceneNode()->createChildSceneNode(); */
+    /* node_->attachObject(ogreEntity); */
 }
 
 GameEngine::GraphicsComponent::~GraphicsComponent() {
-    delete magnumObject_;
+    /* delete node_; */
 }
 
 void GameEngine::GraphicsComponent::update() {
     double x = owner_->position()->x;
     double y = owner_->position()->y;
     double z = owner_->position()->z;
-
+    /* node_->setPosition(x, y, z); */
 
     double w = owner_->orientation()->w;
     x = owner_->orientation()->x;
