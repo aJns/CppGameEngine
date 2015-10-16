@@ -28,8 +28,8 @@ GameEngine::Application::Application(const Arguments& arguments)
         .setHelp("Loads and displays 3D scene file (such as OpenGEX or COLLADA one) provided on command-line.")
         .parse(arguments.argc, arguments.argv);
     std::string sceneFile(args.value("file"));
-    GameEngine::ModelLoader loader(_resourceManager, _drawables, _scene,
-            sceneFile);
+    GameEngine::ModelLoader loader(_resourceManager, _drawables, _scene);
+    loader.loadModel(sceneFile);
 
     /* Every scene needs a camera */
     (_cameraObject = new Object3D{&_scene})

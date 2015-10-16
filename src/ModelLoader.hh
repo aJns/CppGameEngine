@@ -47,13 +47,15 @@ namespace GameEngine {
     public:
         explicit ModelLoader(ViewerResourceManager& resourceManager_,
                 Magnum::SceneGraph::DrawableGroup3D& drawables,
-                Scene3D& scene, std::string sceneFile);
+                Scene3D& scene);
+
+        Object3D* loadModel(std::string sceneFile);
+    private:
         void addObject(Magnum::Trade::AbstractImporter& importer, Object3D*
                 parent, Magnum::UnsignedInt i);
-    private:
+
         ViewerResourceManager* resourceManager_;
         Magnum::SceneGraph::DrawableGroup3D* drawables_;
         Scene3D* _scene;
-        Object3D *_o;
     };
 }

@@ -1,3 +1,6 @@
+// Magnum
+#include <Magnum/Math/Angle.h>
+
 // Temp
 #include "ColoredObject.hh"
 #include "TexturedObject.hh"
@@ -8,11 +11,16 @@
 
 GameEngine::ModelLoader::ModelLoader(ViewerResourceManager& resourceManager,
         Magnum::SceneGraph::DrawableGroup3D& drawables,
-        Scene3D& scene, std::string sceneFile)
+        Scene3D& scene)
     : resourceManager_(&resourceManager),
     drawables_(&drawables),
     _scene(&scene)
 {
+}
+
+Object3D* GameEngine::ModelLoader::loadModel(std::string sceneFile) {
+    Object3D* object;
+
     /* Phong shader instances */
     resourceManager_->set("color", new Shaders::Phong)
         .set("texture", new Shaders::Phong{Shaders::Phong::Flag::DiffuseTexture});
@@ -100,7 +108,7 @@ GameEngine::ModelLoader::ModelLoader(ViewerResourceManager& resourceManager,
             resourceManager_->set(std::to_string(i) + "-indices", indexBuffer.release(), ResourceDataState::Final, ResourcePolicy::Manual);
     }
     /* Default object, parent of all (for manipulation) */
-    _o = new Object3D{_scene};
+    object = new Object3D{_scene};
 
     /* Load the scene */
     if(importer->defaultScene() != -1) {
@@ -108,16 +116,16 @@ GameEngine::ModelLoader::ModelLoader(ViewerResourceManager& resourceManager,
         std::optional<Trade::SceneData> sceneData = importer->scene(importer->defaultScene());
         if(!sceneData) {
             Error() << "Cannot load scene, exiting";
-            return;
+            return object;
         }
         /* Recursively add all children */
         for(UnsignedInt objectId: sceneData->children3D())
-            addObject(*importer, _o, objectId);
+            addObject(*importer, object, objectId);
 
         /* The format has no scene support, display just the first loaded mesh with
            default material and be done with it */
     } else if(resourceManager_->state<Mesh>(ResourceKey{0}) == ResourceState::Final)
-        new ColoredObject(ResourceKey{0}, ResourceKey(-1), _o, &drawables);
+        new ColoredObject(ResourceKey{0}, ResourceKey(-1), object, drawables_);
 
     /* Materials were consumed by objects and they are not needed anymore. Also
        free all texture/mesh data that weren't referenced by any object. */
@@ -125,6 +133,8 @@ GameEngine::ModelLoader::ModelLoader(ViewerResourceManager& resourceManager,
         .clear<Trade::PhongMaterialData>()
         .free<Texture2D>()
         .free<Mesh>();
+
+    return object;
 }
 
 void GameEngine::ModelLoader::addObject(Magnum::Trade::AbstractImporter& importer,
