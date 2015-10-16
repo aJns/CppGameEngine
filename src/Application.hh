@@ -3,6 +3,7 @@
 
 // std
 #include <memory>
+#include <thread>
 
 // Magnum
 #include <Corrade/PluginManager/Manager.h>
@@ -60,10 +61,14 @@ namespace GameEngine {
 
         void initLogic();
     private:
-        GameEngine::Logic* gameLogic_;
+        GameEngine::Logic gameLogic_;
+        std::thread* logicThread_;
+        bool logicShutdownFlag;
 
         void viewportEvent(const Vector2i& size) override;
         void drawEvent() override;
+        void keyReleaseEvent(Magnum::Platform::Sdl2Application::KeyEvent& event) override;
+
         ViewerResourceManager _resourceManager;
         Scene3D _scene;
         Object3D *_o, *_cameraObject;

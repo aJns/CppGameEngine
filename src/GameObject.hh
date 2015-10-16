@@ -20,9 +20,8 @@ namespace GameEngine {
     public:
         GameObject();
         ~GameObject();
-        void addGraphicsComponent();
-        void addScriptComponent(std::string scriptName, 
-                boost::python::object& global);
+        void addGraphicsComponent(GraphicsComponent& graphicsComponent);
+        void addScriptComponent(ScriptComponent& scriptComponent);
         void update();
         std::shared_ptr<GameEngine::Vector3> const position() const;
         void translate(GameEngine::Vector3 const& vector);

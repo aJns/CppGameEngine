@@ -3,6 +3,7 @@
 
 // Magnum
 #include <Magnum/DefaultFramebuffer.h>
+#include <Magnum/Platform/Sdl2Application.h>
 
 // GameEngine
 #include "GraphicsComponent.hh"
@@ -18,7 +19,8 @@
 
 
 GameEngine::Application::Application(const Arguments& arguments)
-    : Platform::Application{arguments, Configuration{}.setTitle("Magnum Viewer Example")} 
+    : Platform::Application{arguments, Configuration{}.setTitle("Magnum Viewer Example")},
+    logicShutdownFlag(true)
 {
     GameEngine::ModelLoader loader(_resourceManager, _drawables);
 
@@ -145,25 +147,26 @@ GameEngine::Application::Application(const Arguments& arguments)
 
     /* Materials were consumed by objects and they are not needed anymore. Also
        free all texture/mesh data that weren't referenced by any object. */
-            _resourceManager.setFallback<Trade::PhongMaterialData>(nullptr)
-                .clear<Trade::PhongMaterialData>()
-                .free<Texture2D>()
-                .free<Mesh>();
+    _resourceManager.setFallback<Trade::PhongMaterialData>(nullptr)
+        .clear<Trade::PhongMaterialData>()
+        .free<Texture2D>()
+        .free<Mesh>();
+
+    initLogic();
 }
 
 GameEngine::Application::~Application() {
-    if (gameLogic_) delete gameLogic_;
+    logicThread_->join();
+    if(logicThread_) {
+        delete logicThread_;
+    }
 }
 
 void GameEngine::Application::initLogic() {
-    bool shutdown = false;
-    gameLogic_ = new GameEngine::Logic();
-    gameLogic_->setup(shutdown);
-    gameLogic_->runInitScript("init_script");
-    std::thread logicThread(GameEngine::gameLoop, std::ref(shutdown),
-            std::ref(*gameLogic_));
-
-    logicThread.join();
+    gameLogic_.setup();
+    gameLogic_.runInitScript("init_script");
+    logicThread_ = new std::thread(GameEngine::gameLoop,
+            std::ref(logicShutdownFlag), std::ref(gameLogic_));
 }
 
 void GameEngine::Application::viewportEvent(const Vector2i& size) {
@@ -175,4 +178,11 @@ void GameEngine::Application::drawEvent() {
     defaultFramebuffer.clear(FramebufferClear::Color|FramebufferClear::Depth);
     _camera->draw(_drawables);
     swapBuffers();
+}
+
+void GameEngine::Application::keyReleaseEvent(KeyEvent& event) {
+    if(event.key() == Magnum::Platform::Sdl2Application::KeyEvent::Key::Esc) {
+        logicShutdownFlag = false;
+        exit();
+    }
 }

@@ -26,13 +26,12 @@ GameEngine::GameObject::~GameObject() {
     }
 }
 
-void GameEngine::GameObject::addGraphicsComponent() {
-    /* graphComp_ = new GameEngine::GraphicsComponent(this); */
+void GameEngine::GameObject::addGraphicsComponent(GraphicsComponent& graphicsComponent) {
+    graphComp_ = &graphicsComponent;
 }
 
-void GameEngine::GameObject::addScriptComponent(std::string scriptName, 
-        boost::python::object& global) {
-    scriptComp_ = new GameEngine::ScriptComponent(*this, scriptName, global);
+void GameEngine::GameObject::addScriptComponent(ScriptComponent& scriptComponent) {
+    scriptComp_ = &scriptComponent;
 }
 
 void GameEngine::GameObject::update() {
