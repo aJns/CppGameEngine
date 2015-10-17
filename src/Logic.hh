@@ -22,7 +22,7 @@ namespace GameEngine {
     Logic(ModelLoader& modelLoader);
     ~Logic();
     void setup();
-    void updateLogic();
+    void update();
     void processInput();
     void runInitScript(std::string scriptName);
 

@@ -47,7 +47,7 @@ void GameEngine::Logic::setup() {
     objectVector_.push_back(objectFactory_->createObject());
 }
 
-void GameEngine::Logic::updateLogic() {
+void GameEngine::Logic::update() {
     for (auto object : objectVector_) {
         object->update();
     }

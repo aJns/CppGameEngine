@@ -23,7 +23,7 @@
 // TODO: Look into memory problems, double free etc
 GameEngine::Application::Application(const Arguments& arguments)
     : Platform::Application{arguments, Configuration{}.setTitle("Magnum Viewer Example")},
-    logicShutdownFlag(true)
+    logicShutdownFlag(false)
 {
     GameEngine::ModelLoader loader(_resourceManager, _drawables, _scene);
 
@@ -42,15 +42,16 @@ GameEngine::Application::Application(const Arguments& arguments)
 }
 
 GameEngine::Application::~Application() {
-    logicThread_->join();
+    /* logicThread_->join(); */
 }
 
 void GameEngine::Application::initLogic() {
     gameLogic_->setup();
     gameLogic_->runInitScript("init_script");
-    logicThread_ = std::unique_ptr<std::thread>(new
-            std::thread(GameEngine::gameLoop, std::ref(logicShutdownFlag),
-                std::ref(*gameLogic_)));
+    setMinimalLoopPeriod(33);
+    /* logicThread_ = std::unique_ptr<std::thread>(new */
+    /*         std::thread(GameEngine::gameLoop, std::ref(logicShutdownFlag), */
+    /*             std::ref(*gameLogic_))); */
 }
 
 void GameEngine::Application::viewportEvent(const Vector2i& size) {
@@ -69,4 +70,8 @@ void GameEngine::Application::keyReleaseEvent(KeyEvent& event) {
         logicShutdownFlag = false;
         exit();
     }
+}
+
+void GameEngine::Application::tickEvent() {
+    gameLogic_->update();
 }

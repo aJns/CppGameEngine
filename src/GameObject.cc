@@ -1,3 +1,6 @@
+// std
+#include <iostream>
+
 // Boost
 #include <boost/python.hpp>
 
@@ -40,6 +43,8 @@ void GameEngine::GameObject::update() {
     if (scriptComp_ != nullptr) {
         scriptComp_->update();
     }
+
+    std::cout << "GameObject: " << this << " updated!" << std::endl;
 }
 
 std::shared_ptr<GameEngine::Vector3> const GameEngine::GameObject::position() const {

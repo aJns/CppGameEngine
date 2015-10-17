@@ -1,3 +1,6 @@
+// std
+#include <iostream>
+
 // GameEngine
 #include "GraphicsComponent.hh"
 #include "ScriptComponent.hh"
@@ -23,5 +26,7 @@ GameEngine::GameObject* GameEngine::GameObjectFactory::createObject() {
         GameEngine::ScriptComponent(*object, "test", *pythonGlobal_);
     object->addScriptComponent(*scriptComp);
     object->addGraphicsComponent(*graphComp);
+
+
     return object;
 }

@@ -59,6 +59,7 @@ namespace GameEngine {
         void viewportEvent(const Vector2i& size) override;
         void drawEvent() override;
         void keyReleaseEvent(Magnum::Platform::Sdl2Application::KeyEvent& event) override;
+        void tickEvent() override;
 
         ViewerResourceManager _resourceManager;
         Scene3D _scene;
