@@ -44,6 +44,7 @@ GameEngine::Logic::~Logic() {
 }
 
 void GameEngine::Logic::setup() {
+    objectVector_.push_back(objectFactory_->createObject());
 }
 
 void GameEngine::Logic::updateLogic() {

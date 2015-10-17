@@ -6,7 +6,7 @@
 
 
 GameEngine::ScriptComponent::ScriptComponent(GameEngine::GameObject& owner,
-        std::string scriptName, boost::python::object global)
+        std::string scriptName, boost::python::object& global)
     : Component(owner)
 {
     try {

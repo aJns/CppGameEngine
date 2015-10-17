@@ -37,14 +37,11 @@
 #include "Logic.hh"
 
 
-// Mostly copied from Magnum example viewer. Code could and probably should be
-// divided into separate classes, for example Graphics, InputHandler and maybe
-// ResourceManager.
-// TODO: Divide into smaller modules, see above comment
 using namespace Magnum;
 
 namespace GameEngine {
-    typedef ResourceManager<Buffer, Mesh, Texture2D, Shaders::Phong, Trade::PhongMaterialData> ViewerResourceManager;
+    typedef ResourceManager<Buffer, Mesh, Texture2D, Shaders::Phong,
+            Trade::PhongMaterialData> ViewerResourceManager;
     typedef SceneGraph::Object<SceneGraph::MatrixTransformation3D> Object3D;
     typedef SceneGraph::Scene<SceneGraph::MatrixTransformation3D> Scene3D;
 
