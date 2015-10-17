@@ -18,7 +18,7 @@ include_directories(
     ${MAGNUM_INCLUDE_DIRS} 
     ${MAGNUM_APPLICATION_INCLUDE_DIRS}
     ${CMAKE_CURRENT_BINARY_DIR}
-    ./      # So python interface can find it.
+    ${CMAKE_CURRENT_SOURCE_DIR}
     )
 
 set( LINKED_LIBS 
@@ -45,29 +45,9 @@ file(GLOB SRCS
     "./*"
     )
 
-add_executable(GameEngineTest WIN32 ${HDRS} ${SRCS})
-
-target_compile_features(GameEngineTest PRIVATE cxx_range_for)
-
-target_link_libraries(GameEngineTest 
-    ${LINKED_LIBS}
-    )
-
-add_library( GameEngine SHARED
-    ./python/PythonInterface.hh
-    ./python/PythonInterface.cc 
-    
-    ./TexturedObject.cc
-    ./ColoredObject.cc
-    ./ModelLoader.cc
-    ./Logic.cc
-    ./GameObject.cc
-    ./GameObjectFactory.cc
-    ./Component.cc
-    ./GraphicsComponent.cc
-    ./ScriptComponent.cc
-    ./Vector3.cc
-    ./Quaternion.cc
+add_library( GameEngine SHARED 
+    ${HDRS} 
+    ${SRCS}
     )
 
 target_link_libraries(GameEngine 
@@ -75,6 +55,24 @@ target_link_libraries(GameEngine
     )
 
 target_compile_features(GameEngine PRIVATE cxx_range_for)
+
+
+link_directories(${CMAKE_BINARY_DIR}/lib/)
+
+add_executable(GameEngineTest WIN32 
+    ./app/Application.hh
+    ./app/Application.cc
+    ${HDRS} 
+    ${SRCS}
+    )
+
+target_link_libraries(GameEngineTest 
+    GameEngine
+    ${LINKED_LIBS}
+    )
+
+target_compile_features(GameEngineTest PRIVATE cxx_range_for)
+
 
 # set_target_properties(${LIBRARY_NAME} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
