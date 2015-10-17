@@ -27,5 +27,5 @@ BOOST_PYTHON_MODULE(libGameEngine) {
         .def("normalize", &GameEngine::Vector3::normalize);
     class_<GameEngine::Quaternion>("Quaternion", init<GameEngine::Vector3, double>())
         .def(init<>());
-    class_<GameEngine::Logic>("Logic", no_init);
+    class_<GameEngine::Logic, boost::noncopyable>("Logic", no_init);
 }

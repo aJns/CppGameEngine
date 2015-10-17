@@ -1,5 +1,15 @@
 #include "GameObjectFactory.hh"
 
-void GameEngine::GameObjectFactory::createObject() {
-    objectVector_->push_back(new GameEngine::GameObject());
+
+GameEngine::GameObjectFactory::GameObjectFactory(ModelLoader& modelLoader,
+        boost::python::object& pythonGlobal)
+    : modelLoader_(&modelLoader),
+    pythonGlobal_(&pythonGlobal)
+{}
+
+GameEngine::GameObjectFactory::~GameObjectFactory() {
+}
+
+GameEngine::GameObject* GameEngine::GameObjectFactory::createObject() {
+    return new GameEngine::GameObject();
 }

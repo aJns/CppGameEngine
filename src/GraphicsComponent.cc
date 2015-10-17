@@ -5,16 +5,14 @@
 #include "GraphicsComponent.hh"
 
 
-GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject* owner)
-    : Component(owner)
+GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject& owner,
+        GameEngine::Object3D& graphicsObject)
+    : Component(owner),
+    graphicsObject_(&graphicsObject)
 {
-    /* Ogre::Entity* ogreEntity = sceneMgr.createEntity("ogrehead.mesh"); */
-    /* node_ = sceneMgr.getRootSceneNode()->createChildSceneNode(); */
-    /* node_->attachObject(ogreEntity); */
 }
 
 GameEngine::GraphicsComponent::~GraphicsComponent() {
-    /* delete node_; */
 }
 
 void GameEngine::GraphicsComponent::update() {

@@ -11,17 +11,19 @@
 
 // GameEngine
 #include "GameObject.hh"
+#include "ModelLoader.hh"
 
 
 namespace GameEngine {
     class GameObjectFactory {
     public:
-        GameObjectFactory(std::vector<GameObject*>& objectVector,
+        GameObjectFactory(ModelLoader& modelLoader,
                 boost::python::object& pythonGlobal);
+        ~GameObjectFactory();
         
-        void createObject();
+        GameObject* createObject();
     private:
-        std::vector<GameObject*>* objectVector_;
+        std::unique_ptr<ModelLoader> modelLoader_;
         std::shared_ptr<boost::python::object> pythonGlobal_;
     };
 }

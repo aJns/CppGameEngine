@@ -11,13 +11,15 @@
 
 // GameEngine
 #include "GameObject.hh"
+#include "GameObjectFactory.hh"
+#include "ModelLoader.hh"
 
 
 namespace GameEngine {
   class Logic
   {
   public:
-    Logic();
+    Logic(ModelLoader& modelLoader);
     ~Logic();
     void setup();
     void updateLogic();
@@ -25,9 +27,9 @@ namespace GameEngine {
     void runInitScript(std::string scriptName);
 
   private:
-    /* std::shared_ptr<boost::python::object> pythonGlobal_; */
-    boost::python::object* pythonGlobal_;
+    std::shared_ptr<boost::python::object> pythonGlobal_;
     std::vector<GameEngine::GameObject*> objectVector_;
+    std::unique_ptr<GameObjectFactory> objectFactory_;
   };
 }
 

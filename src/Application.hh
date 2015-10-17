@@ -55,8 +55,8 @@ namespace GameEngine {
 
         void initLogic();
     private:
-        GameEngine::Logic gameLogic_;
-        std::thread* logicThread_;
+        std::unique_ptr<GameEngine::Logic> gameLogic_;
+        std::unique_ptr<std::thread> logicThread_;
         bool logicShutdownFlag;
 
         void viewportEvent(const Vector2i& size) override;
@@ -65,7 +65,7 @@ namespace GameEngine {
 
         ViewerResourceManager _resourceManager;
         Scene3D _scene;
-        Object3D *_o, *_cameraObject;
+        Object3D *_cameraObject;
         SceneGraph::Camera3D* _camera;
         SceneGraph::DrawableGroup3D _drawables;
         Magnum::Vector3 _previousPosition;

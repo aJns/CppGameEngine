@@ -10,6 +10,7 @@
 #include "GraphicsComponent.hh"
 #include "GameLoop.hh"
 #include "ModelLoader.hh"
+#include "GameObjectFactory.hh"
 
 // Temp
 #include "ColoredObject.hh"
@@ -29,7 +30,7 @@ GameEngine::Application::Application(const Arguments& arguments)
         .parse(arguments.argc, arguments.argv);
     std::string sceneFile(args.value("file"));
     GameEngine::ModelLoader loader(_resourceManager, _drawables, _scene);
-    loader.loadModel(sceneFile);
+    /* loader.loadModel(sceneFile); */
 
     /* Every scene needs a camera */
     (_cameraObject = new Object3D{&_scene})
@@ -41,21 +42,20 @@ GameEngine::Application::Application(const Arguments& arguments)
     Renderer::enable(Renderer::Feature::DepthTest);
     Renderer::enable(Renderer::Feature::FaceCulling);
 
+    gameLogic_ = std::unique_ptr<GameEngine::Logic>(new GameEngine::Logic(loader));
     initLogic();
 }
 
 GameEngine::Application::~Application() {
     logicThread_->join();
-    if(logicThread_) {
-        delete logicThread_;
-    }
 }
 
 void GameEngine::Application::initLogic() {
-    gameLogic_.setup();
-    gameLogic_.runInitScript("init_script");
-    logicThread_ = new std::thread(GameEngine::gameLoop,
-            std::ref(logicShutdownFlag), std::ref(gameLogic_));
+    gameLogic_->setup();
+    gameLogic_->runInitScript("init_script");
+    logicThread_ = std::unique_ptr<std::thread>(new
+            std::thread(GameEngine::gameLoop, std::ref(logicShutdownFlag),
+                std::ref(*gameLogic_)));
 }
 
 void GameEngine::Application::viewportEvent(const Vector2i& size) {

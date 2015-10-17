@@ -1,3 +1,7 @@
+#ifndef MODELLOADER_HH
+#define MODELLOADER_HH
+
+
 // std
 #include <memory>
 #include <string>
@@ -59,3 +63,6 @@ namespace GameEngine {
         Scene3D* _scene;
     };
 }
+
+
+#endif // MODELLOADER_HH
