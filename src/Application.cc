@@ -20,6 +20,7 @@
 #include "Application.hh"
 
 
+// TODO: Look into memory problems, double free etc
 GameEngine::Application::Application(const Arguments& arguments)
     : Platform::Application{arguments, Configuration{}.setTitle("Magnum Viewer Example")},
     logicShutdownFlag(true)

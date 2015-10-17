@@ -55,7 +55,20 @@ target_link_libraries(GameEngineTest
 
 add_library( GameEngine SHARED
     ./python/PythonInterface.hh
-    ./python/PythonInterface.cc )
+    ./python/PythonInterface.cc 
+    
+    ./TexturedObject.cc
+    ./ColoredObject.cc
+    ./ModelLoader.cc
+    ./Logic.cc
+    ./GameObject.cc
+    ./GameObjectFactory.cc
+    ./Component.cc
+    ./GraphicsComponent.cc
+    ./ScriptComponent.cc
+    ./Vector3.cc
+    ./Quaternion.cc
+    )
 
 target_link_libraries(GameEngine 
     ${LINKED_LIBS}
