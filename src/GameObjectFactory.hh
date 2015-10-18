@@ -8,6 +8,7 @@
 
 // Boost
 #include <boost/python.hpp>
+#include <boost/ptr_container/ptr_vector.hpp>
 
 // GameEngine
 #include "GameObject.hh"
@@ -17,14 +18,14 @@
 namespace GameEngine {
     class GameObjectFactory {
     public:
-        GameObjectFactory(ModelLoader& modelLoader,
-                boost::python::object& pythonGlobal);
+        GameObjectFactory(ModelLoader* modelLoader,
+                boost::python::object* pythonGlobal);
         ~GameObjectFactory();
         
-        GameObject* createObject();
+        void createObject(boost::ptr_vector<GameObject>& objectVector);
     private:
-        std::unique_ptr<ModelLoader> modelLoader_;
-        std::shared_ptr<boost::python::object> pythonGlobal_;
+        ModelLoader* modelLoader_;
+        boost::python::object* pythonGlobal_;
     };
 }
 

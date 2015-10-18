@@ -53,7 +53,7 @@ namespace GameEngine {
                 Magnum::SceneGraph::DrawableGroup3D& drawables,
                 Scene3D& scene);
 
-        Object3D* loadModel(std::string sceneFile);
+        void loadModel(Object3D* object, std::string sceneFile);
     private:
         void addObject(Magnum::Trade::AbstractImporter& importer, Object3D*
                 parent, Magnum::UnsignedInt i);

@@ -10,6 +10,7 @@
 // GameEngine
 #include "Vector3.hh"
 #include "Quaternion.hh"
+#include "ModelLoader.hh"
 
 
 namespace GameEngine {
@@ -20,20 +21,24 @@ namespace GameEngine {
     public:
         GameObject();
         ~GameObject();
-        void addGraphicsComponent(GraphicsComponent& graphicsComponent);
-        void addScriptComponent(ScriptComponent& scriptComponent);
         void update();
-        std::shared_ptr<GameEngine::Vector3> const position() const;
+
+        void addGraphicsComponent(ModelLoader& modelLoader);
+        void addScriptComponent(std::string scriptName, boost::python::object&
+                pythonGlobal);
+
+        const GameEngine::Vector3& position() const;
         void translate(GameEngine::Vector3 const& vector);
         void moveTo(GameEngine::Vector3 const& vector);
-        std::shared_ptr<GameEngine::Quaternion> const orientation() const;
+
+        const GameEngine::Quaternion& orientation() const;
         void rotate(GameEngine::Quaternion const& rotation);
         void setOrientation(GameEngine::Quaternion const& orientation);
     private:
         GameEngine::Vector3 position_;
         GameEngine::Quaternion orientation_;
-        GameEngine::GraphicsComponent* graphComp_;
-        GameEngine::ScriptComponent* scriptComp_;
+        std::unique_ptr<GameEngine::GraphicsComponent> graphComp_;
+        std::unique_ptr<GameEngine::ScriptComponent> scriptComp_;
     };
 }
 

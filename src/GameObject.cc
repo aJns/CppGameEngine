@@ -21,19 +21,18 @@ GameEngine::GameObject::GameObject()
 {}
 
 GameEngine::GameObject::~GameObject() {
-    if(graphComp_) {
-        delete graphComp_;
-    }
-    if(scriptComp_) {
-        delete scriptComp_;
-    }
-}
-void GameEngine::GameObject::addGraphicsComponent(GraphicsComponent& graphicsComponent) {
-    graphComp_ = &graphicsComponent;
 }
 
-void GameEngine::GameObject::addScriptComponent(ScriptComponent& scriptComponent) {
-    scriptComp_ = &scriptComponent;
+void GameEngine::GameObject::addGraphicsComponent(GameEngine::ModelLoader&
+        modelLoader) {
+    graphComp_ = std::unique_ptr<GameEngine::GraphicsComponent>(new
+            GameEngine::GraphicsComponent(this, modelLoader));
+}
+
+void GameEngine::GameObject::addScriptComponent(std::string scriptName,
+        boost::python::object& pythonGlobal) {
+    scriptComp_ = std::unique_ptr<GameEngine::ScriptComponent>(new
+            GameEngine::ScriptComponent(this, scriptName, pythonGlobal));
 }
 
 void GameEngine::GameObject::update() {
@@ -47,8 +46,8 @@ void GameEngine::GameObject::update() {
     std::cout << "GameObject: " << this << " updated!" << std::endl;
 }
 
-std::shared_ptr<GameEngine::Vector3> const GameEngine::GameObject::position() const {
-    return std::make_shared<GameEngine::Vector3>(position_);
+const GameEngine::Vector3& GameEngine::GameObject::position() const {
+    return position_;
 }
 
 void GameEngine::GameObject::translate(GameEngine::Vector3 const& vector) {
@@ -59,8 +58,8 @@ void GameEngine::GameObject::moveTo(GameEngine::Vector3 const& vector) {
     position_ = vector;
 }
 
-std::shared_ptr<GameEngine::Quaternion> const GameEngine::GameObject::orientation() const {
-    return std::make_shared<GameEngine::Quaternion>(orientation_);
+const GameEngine::Quaternion& GameEngine::GameObject::orientation() const {
+    return orientation_;
 }
 
 void GameEngine::GameObject::rotate(GameEngine::Quaternion const& rotation) {

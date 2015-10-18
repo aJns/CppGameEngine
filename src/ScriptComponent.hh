@@ -16,7 +16,7 @@ namespace GameEngine {
     class ScriptComponent : public GameEngine::Component
     {
     public:
-        ScriptComponent(GameEngine::GameObject& owner, std::string scriptName,
+        ScriptComponent(GameEngine::GameObject* owner, std::string scriptName,
                 boost::python::object& global);
         virtual ~ScriptComponent();
         virtual void update();

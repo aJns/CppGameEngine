@@ -15,7 +15,7 @@
 #include "Logic.hh"
 
 
-GameEngine::Logic::Logic(ModelLoader& modelLoader) 
+GameEngine::Logic::Logic(ModelLoader* modelLoader) 
     : objectVector_{}
 {
     Py_Initialize();
@@ -24,8 +24,8 @@ GameEngine::Logic::Logic(ModelLoader& modelLoader)
     try {
         // Create the python environment
         boost::python::object main = boost::python::import("__main__");
-        pythonGlobal_=
-            std::make_shared<boost::python::object>(main.attr("__dict__"));
+        pythonGlobal_= std::unique_ptr<boost::python::object>(new
+                boost::python::object(main.attr("__dict__")));
     }
     catch(...) {
         std::cout << "Python error! " << "Couldn't setup Python environment!"
@@ -34,22 +34,20 @@ GameEngine::Logic::Logic(ModelLoader& modelLoader)
     }
 
     objectFactory_ = std::unique_ptr<GameEngine::GameObjectFactory>(new
-            GameEngine::GameObjectFactory(modelLoader, *pythonGlobal_));
+            GameEngine::GameObjectFactory(modelLoader, pythonGlobal_.get()));
 }
 
 GameEngine::Logic::~Logic() {
-    for (auto object : objectVector_) {
-        delete object;
-    }
+    objectVector_.clear();
 }
 
 void GameEngine::Logic::setup() {
-    objectVector_.push_back(objectFactory_->createObject());
+    objectFactory_->createObject(objectVector_);
 }
 
 void GameEngine::Logic::update() {
-    for (auto object : objectVector_) {
-        object->update();
+    for (GameEngine::GameObject& object : objectVector_) {
+        object.update();
     }
 }
 

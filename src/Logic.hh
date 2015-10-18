@@ -8,6 +8,7 @@
 
 // Boost
 #include <boost/python.hpp>
+#include <boost/ptr_container/ptr_vector.hpp>
 
 // GameEngine
 #include "GameObject.hh"
@@ -19,7 +20,7 @@ namespace GameEngine {
   class Logic
   {
   public:
-    Logic(ModelLoader& modelLoader);
+    Logic(ModelLoader* modelLoader);
     ~Logic();
     void setup();
     void update();
@@ -27,8 +28,8 @@ namespace GameEngine {
     void runInitScript(std::string scriptName);
 
   private:
-    std::shared_ptr<boost::python::object> pythonGlobal_;
-    std::vector<GameEngine::GameObject*> objectVector_;
+    std::unique_ptr<boost::python::object> pythonGlobal_;
+    boost::ptr_vector<GameEngine::GameObject> objectVector_;
     std::unique_ptr<GameObjectFactory> objectFactory_;
   };
 }

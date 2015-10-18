@@ -35,6 +35,7 @@
 
 // GameEngine
 #include "Logic.hh"
+#include "ModelLoader.hh"
 
 
 using namespace Magnum;
@@ -53,7 +54,7 @@ namespace GameEngine {
         void initLogic();
     private:
         std::unique_ptr<GameEngine::Logic> gameLogic_;
-        std::unique_ptr<std::thread> logicThread_;
+        std::unique_ptr<ModelLoader> modelLoader_;
         bool logicShutdownFlag;
 
         void viewportEvent(const Vector2i& size) override;
@@ -63,10 +64,11 @@ namespace GameEngine {
 
         ViewerResourceManager _resourceManager;
         Scene3D _scene;
-        Object3D *_cameraObject;
-        SceneGraph::Camera3D* _camera;
         SceneGraph::DrawableGroup3D _drawables;
         Magnum::Vector3 _previousPosition;
+        // The scenegraph takes care of these objects
+        Object3D* _cameraObject;
+        SceneGraph::Camera3D* _camera;
     };
 }
 

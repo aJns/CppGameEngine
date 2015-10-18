@@ -20,12 +20,12 @@
 #include "Application.hh"
 
 
-// TODO: Look into memory problems, double free etc
 GameEngine::Application::Application(const Arguments& arguments)
     : Platform::Application{arguments, Configuration{}.setTitle("Magnum Viewer Example")},
     logicShutdownFlag(false)
 {
-    GameEngine::ModelLoader loader(_resourceManager, _drawables, _scene);
+    modelLoader_ = std::unique_ptr<GameEngine::ModelLoader>(new
+            GameEngine::ModelLoader(_resourceManager, _drawables, _scene));
 
     /* Every scene needs a camera */
     (_cameraObject = new Object3D{&_scene})
@@ -37,21 +37,18 @@ GameEngine::Application::Application(const Arguments& arguments)
     Renderer::enable(Renderer::Feature::DepthTest);
     Renderer::enable(Renderer::Feature::FaceCulling);
 
-    gameLogic_ = std::unique_ptr<GameEngine::Logic>(new GameEngine::Logic(loader));
+    gameLogic_ = std::unique_ptr<GameEngine::Logic>(new
+            GameEngine::Logic(modelLoader_.get()));
     initLogic();
 }
 
 GameEngine::Application::~Application() {
-    /* logicThread_->join(); */
 }
 
 void GameEngine::Application::initLogic() {
     gameLogic_->setup();
     gameLogic_->runInitScript("init_script");
     setMinimalLoopPeriod(33);
-    /* logicThread_ = std::unique_ptr<std::thread>(new */
-    /*         std::thread(GameEngine::gameLoop, std::ref(logicShutdownFlag), */
-    /*             std::ref(*gameLogic_))); */
 }
 
 void GameEngine::Application::viewportEvent(const Vector2i& size) {

@@ -1,3 +1,5 @@
+set(CMAKE_BUILD_TYPE Debug)
+
 find_package(Magnum REQUIRED
     MeshTools
     Shaders

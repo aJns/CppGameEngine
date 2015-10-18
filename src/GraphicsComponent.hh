@@ -15,8 +15,7 @@ namespace GameEngine {
     class GraphicsComponent : public GameEngine::Component 
     {
     public:
-        GraphicsComponent(GameObject& owner,
-                Object3D& graphicsObject);
+        GraphicsComponent(GameObject* owner, ModelLoader& modelLoader);
         virtual ~GraphicsComponent();
         virtual void update();
     private:

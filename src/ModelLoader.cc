@@ -18,8 +18,7 @@ GameEngine::ModelLoader::ModelLoader(ViewerResourceManager& resourceManager,
 {
 }
 
-Object3D* GameEngine::ModelLoader::loadModel(std::string sceneFile) {
-    Object3D* object;
+void GameEngine::ModelLoader::loadModel(Object3D* object, std::string sceneFile) {
 
     /* Phong shader instances */
     resourceManager_->set("color", new Shaders::Phong)
@@ -116,7 +115,7 @@ Object3D* GameEngine::ModelLoader::loadModel(std::string sceneFile) {
         std::optional<Trade::SceneData> sceneData = importer->scene(importer->defaultScene());
         if(!sceneData) {
             Error() << "Cannot load scene, exiting";
-            return object;
+            return;
         }
         /* Recursively add all children */
         for(UnsignedInt objectId: sceneData->children3D())
@@ -133,8 +132,6 @@ Object3D* GameEngine::ModelLoader::loadModel(std::string sceneFile) {
         .clear<Trade::PhongMaterialData>()
         .free<Texture2D>()
         .free<Mesh>();
-
-    return object;
 }
 
 void GameEngine::ModelLoader::addObject(Magnum::Trade::AbstractImporter& importer,

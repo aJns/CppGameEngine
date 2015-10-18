@@ -14,29 +14,29 @@
 #include "GraphicsComponent.hh"
 
 
-GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject& owner,
-        GameEngine::Object3D& graphicsObject)
-    : Component(owner),
-    graphicsObject_(&graphicsObject)
+GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject* owner,
+        GameEngine::ModelLoader& modelLoader)
+    : Component(owner)
 {
+    modelLoader.loadModel(graphicsObject_.get(), "scene.ogex");
 }
 
 GameEngine::GraphicsComponent::~GraphicsComponent() {
 }
 
 void GameEngine::GraphicsComponent::update() {
-    double x = owner_->position()->x;
-    double y = owner_->position()->y;
-    double z = owner_->position()->z;
+    double x = owner_->position().x;
+    double y = owner_->position().y;
+    double z = owner_->position().z;
     Magnum::Vector3 posVect(x, y, z);
 
     std::cout << x << y << z << std::endl;
 
 
-    double w = owner_->orientation()->w;
-    x = owner_->orientation()->x;
-    y = owner_->orientation()->y;
-    z = owner_->orientation()->z;
+    double w = owner_->orientation().w;
+    x = owner_->orientation().x;
+    y = owner_->orientation().y;
+    z = owner_->orientation().z;
     Magnum::Vector3 rotVect(x, y, z);
     Magnum::Quaternion quat(rotVect, w);
     Magnum::Matrix3 rotMatrix(quat.toMatrix());

@@ -8,25 +8,19 @@
 #include "GameObjectFactory.hh"
 
 
-GameEngine::GameObjectFactory::GameObjectFactory(ModelLoader& modelLoader,
-        boost::python::object& pythonGlobal)
-    : modelLoader_(&modelLoader),
-    pythonGlobal_(&pythonGlobal)
+GameEngine::GameObjectFactory::GameObjectFactory(ModelLoader* modelLoader,
+        boost::python::object* pythonGlobal)
+    : modelLoader_(modelLoader),
+    pythonGlobal_(pythonGlobal)
 {}
 
 GameEngine::GameObjectFactory::~GameObjectFactory() {
 }
 
-GameEngine::GameObject* GameEngine::GameObjectFactory::createObject() {
-    GameEngine::GameObject* object = new GameEngine::GameObject();
-    GameEngine::GraphicsComponent* graphComp = new
-        GameEngine::GraphicsComponent(*object,
-                *modelLoader_->loadModel("scene.ogex"));
-    GameEngine::ScriptComponent* scriptComp = new
-        GameEngine::ScriptComponent(*object, "test", *pythonGlobal_);
-    object->addScriptComponent(*scriptComp);
-    object->addGraphicsComponent(*graphComp);
-
-
-    return object;
+void
+GameEngine::GameObjectFactory::createObject(boost::ptr_vector<GameEngine::GameObject>&
+        objectVector) {
+    objectVector.push_back(new GameEngine::GameObject());
+    objectVector.back().addGraphicsComponent(*modelLoader_);
+    objectVector.back().addScriptComponent("test", *pythonGlobal_);
 }
