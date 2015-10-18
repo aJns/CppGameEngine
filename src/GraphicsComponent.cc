@@ -41,7 +41,7 @@ void GameEngine::GraphicsComponent::update() {
     Magnum::Quaternion quat(rotVect, w);
     Magnum::Matrix3 rotMatrix(quat.toMatrix());
 
-    graphicsObject_->transform(Magnum::Matrix4::from(rotMatrix, posVect));
+    /* graphicsObject_->transform(Magnum::Matrix4::from(rotMatrix, posVect)); */
 
     std::cout << x << y << z << w << std::endl;
 }

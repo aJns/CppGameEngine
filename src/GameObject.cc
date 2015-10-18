@@ -36,10 +36,10 @@ void GameEngine::GameObject::addScriptComponent(std::string scriptName,
 }
 
 void GameEngine::GameObject::update() {
-    if (graphComp_ != nullptr) {
+    if (graphComp_) {
         graphComp_->update();
     }
-    if (scriptComp_ != nullptr) {
+    if (scriptComp_) {
         scriptComp_->update();
     }
 
