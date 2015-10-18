@@ -1,4 +1,4 @@
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE RelWithDebInfo)
 
 find_package(Magnum REQUIRED
     MeshTools
@@ -7,6 +7,9 @@ find_package(Magnum REQUIRED
     Sdl2Application)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CORRADE_CXX_FLAGS}")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/configure.h.cmake
+               ${CMAKE_CURRENT_BINARY_DIR}/configure.h)
 
 find_package (Threads)
 

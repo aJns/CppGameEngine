@@ -1,4 +1,5 @@
 build/*
+documentation/*
 *.log
 *.swp
 *.pyc
