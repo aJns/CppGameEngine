@@ -19,7 +19,7 @@ namespace GameEngine {
         virtual ~GraphicsComponent();
         virtual void update();
     private:
-        std::unique_ptr<Object3D> graphicsObject_;
+        Object3D* graphicsObject_;
     };
 }
 

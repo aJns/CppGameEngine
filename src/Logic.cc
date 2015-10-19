@@ -72,3 +72,7 @@ void GameEngine::Logic::runInitScript(std::string scriptName) {
         PyErr_Print();
     }
 }
+
+void GameEngine::Logic::cleanup() {
+    objectVector_.clear();
+}

@@ -21,11 +21,10 @@
 
 
 GameEngine::Application::Application(const Arguments& arguments)
-    : Platform::Application{arguments, Configuration{}.setTitle("Magnum Viewer Example")},
-    logicShutdownFlag(false)
+    : Platform::Application{arguments, Configuration{}.setTitle("Magnum Viewer Example")}
 {
     modelLoader_ = std::unique_ptr<GameEngine::ModelLoader>(new
-            GameEngine::ModelLoader(_resourceManager, _drawables, _scene));
+            GameEngine::ModelLoader(&_resourceManager, &_drawables, &_scene));
 
     /* Every scene needs a camera */
     (_cameraObject = new Object3D{&_scene})
@@ -64,7 +63,7 @@ void GameEngine::Application::drawEvent() {
 
 void GameEngine::Application::keyReleaseEvent(KeyEvent& event) {
     if(event.key() == Magnum::Platform::Sdl2Application::KeyEvent::Key::Esc) {
-        logicShutdownFlag = false;
+        gameLogic_->cleanup();
         exit();
     }
 }

@@ -9,17 +9,16 @@
 #include "ModelLoader.hh"
 
 
-GameEngine::ModelLoader::ModelLoader(ViewerResourceManager& resourceManager,
-        Magnum::SceneGraph::DrawableGroup3D& drawables,
-        Scene3D& scene)
-    : resourceManager_(&resourceManager),
-    drawables_(&drawables),
-    _scene(&scene)
+GameEngine::ModelLoader::ModelLoader(ViewerResourceManager* resourceManager,
+        Magnum::SceneGraph::DrawableGroup3D* drawables,
+        Scene3D* scene)
+    : resourceManager_(resourceManager),
+    drawables_(drawables),
+    _scene(scene)
 {
 }
 
 void GameEngine::ModelLoader::loadModel(Object3D* object, std::string sceneFile) {
-
     /* Phong shader instances */
     resourceManager_->set("color", new Shaders::Phong)
         .set("texture", new Shaders::Phong{Shaders::Phong::Flag::DiffuseTexture});
@@ -106,9 +105,6 @@ void GameEngine::ModelLoader::loadModel(Object3D* object, std::string sceneFile)
         if(indexBuffer)
             resourceManager_->set(std::to_string(i) + "-indices", indexBuffer.release(), ResourceDataState::Final, ResourcePolicy::Manual);
     }
-    /* Default object, parent of all (for manipulation) */
-    object = new Object3D{_scene};
-
     /* Load the scene */
     if(importer->defaultScene() != -1) {
         Debug() << "Adding default scene" << importer->sceneName(importer->defaultScene());
@@ -183,4 +179,8 @@ void GameEngine::ModelLoader::addObject(Magnum::Trade::AbstractImporter& importe
     /* Recursively add children */
     for(std::size_t id: objectData->children())
         addObject(importer, object, id);
+}
+
+GameEngine::Scene3D* GameEngine::ModelLoader::getScene() {
+    return _scene;
 }

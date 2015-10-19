@@ -55,7 +55,6 @@ namespace GameEngine {
     private:
         std::unique_ptr<GameEngine::Logic> gameLogic_;
         std::unique_ptr<ModelLoader> modelLoader_;
-        bool logicShutdownFlag;
 
         void viewportEvent(const Vector2i& size) override;
         void drawEvent() override;

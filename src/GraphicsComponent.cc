@@ -18,30 +18,14 @@ GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject* owner,
         GameEngine::ModelLoader& modelLoader)
     : Component(owner)
 {
-    modelLoader.loadModel(graphicsObject_.get(), "scene.ogex");
+    graphicsObject_ = new Object3D{modelLoader.getScene()};
+    modelLoader.loadModel(graphicsObject_, "scene.ogex");
+    graphicsObject_->rotateX(Magnum::Rad(1.5));
 }
 
 GameEngine::GraphicsComponent::~GraphicsComponent() {
+    if(graphicsObject_) { delete graphicsObject_; }
 }
 
 void GameEngine::GraphicsComponent::update() {
-    double x = owner_->position().x;
-    double y = owner_->position().y;
-    double z = owner_->position().z;
-    Magnum::Vector3 posVect(x, y, z);
-
-    std::cout << x << y << z << std::endl;
-
-
-    double w = owner_->orientation().w;
-    x = owner_->orientation().x;
-    y = owner_->orientation().y;
-    z = owner_->orientation().z;
-    Magnum::Vector3 rotVect(x, y, z);
-    Magnum::Quaternion quat(rotVect, w);
-    Magnum::Matrix3 rotMatrix(quat.toMatrix());
-
-    /* graphicsObject_->transform(Magnum::Matrix4::from(rotMatrix, posVect)); */
-
-    std::cout << x << y << z << w << std::endl;
 }

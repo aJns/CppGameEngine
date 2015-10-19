@@ -27,6 +27,8 @@ namespace GameEngine {
     void processInput();
     void runInitScript(std::string scriptName);
 
+    void cleanup();
+
   private:
     std::unique_ptr<boost::python::object> pythonGlobal_;
     boost::ptr_vector<GameEngine::GameObject> objectVector_;
