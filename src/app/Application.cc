@@ -70,4 +70,5 @@ void GameEngine::Application::keyReleaseEvent(KeyEvent& event) {
 
 void GameEngine::Application::tickEvent() {
     gameLogic_->update();
+    redraw();
 }

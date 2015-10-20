@@ -28,4 +28,11 @@ GameEngine::GraphicsComponent::~GraphicsComponent() {
 }
 
 void GameEngine::GraphicsComponent::update() {
+    float x = owner_->position().x;
+    float y = owner_->position().y;
+    float z = owner_->position().z;
+
+    Magnum::Vector3 vector(x, y, z);
+
+    graphicsObject_->setTransformation(Magnum::Matrix4::translation(vector));
 }
