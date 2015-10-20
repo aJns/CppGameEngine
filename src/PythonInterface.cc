@@ -21,6 +21,7 @@ BOOST_PYTHON_MODULE(libGameEngine) {
     // GameEngine
     class_<GameEngine::GameObject, boost::noncopyable>("GameObject", no_init)
         .def("translate", &GameEngine::GameObject::translate)
+        .def("moveTo", &GameEngine::GameObject::moveTo)
         .def("rotate", &GameEngine::GameObject::rotate)
         .def("setOrientation", &GameEngine::GameObject::setOrientation);
     class_<GameEngine::Vector3>("Vector3", init<double, double, double>())

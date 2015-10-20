@@ -12,12 +12,14 @@ def test(gameObject):
 class testClass:
     def __init__(self, gameObject):
         self.gameObject = gameObject
-        x = random.uniform(-1,1)
-        y = random.uniform(-1,1)
-        z = random.uniform(-1,1)
-        x = 0
-        y = 0
-        z = 0
+        # x = random.uniform(-1,1)
+        # y = random.uniform(-1,1)
+        # z = random.uniform(-1,1)
+
+        x = 1
+        y = 1
+        z = 1
+
         self.vector = libGameEngine.Vector3(x, y, z)
         x = random.uniform(-1,1)
         y = random.uniform(-1,1)
@@ -35,6 +37,6 @@ class testClass:
             quat = libGameEngine.Quaternion()
             self.gameObject.setOrientation(quat)
             self.counter = 0
-        self.gameObject.translate(self.vector)
+        self.gameObject.moveTo(self.vector)
         self.gameObject.rotate(self.quaternion)
         self.counter += 1
