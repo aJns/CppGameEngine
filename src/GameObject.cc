@@ -46,30 +46,31 @@ void GameEngine::GameObject::update() {
     std::cout << "GameObject: " << this << " updated!" << std::endl;
 }
 
-const GameEngine::Vector3& GameEngine::GameObject::position() const {
+const Magnum::Vector3& GameEngine::GameObject::position() const {
     return position_;
 }
 
-void GameEngine::GameObject::translate(GameEngine::Vector3 const& vector) {
+void GameEngine::GameObject::translate(Magnum::Vector3 const& vector) {
     position_ += vector;
 }
 
-void GameEngine::GameObject::moveTo(GameEngine::Vector3 const& vector) {
+void GameEngine::GameObject::moveTo(Magnum::Vector3 const& vector) {
     position_ = vector;
 }
 
-const GameEngine::Quaternion& GameEngine::GameObject::orientation() const {
+const Magnum::Quaternion& GameEngine::GameObject::orientation() const {
     return orientation_;
 }
 
-void GameEngine::GameObject::rotate(GameEngine::Quaternion const& rotation) {
-    orientation_ = rotation * orientation_;
-
-    if(!orientation_.isUnit(0.01)) {
-        orientation_.normalize();
+void GameEngine::GameObject::rotate(Magnum::Quaternion const& rotation) {
+    if(rotation.axis().isNormalized()) {
+        orientation_ = rotation * orientation_;
+    } 
+    else {
+        std::cout << "Can't rotate, axis vector isn't normalized" << std::endl;
     }
 }
 
-void GameEngine::GameObject::setOrientation(GameEngine::Quaternion const& orientation) {
+void GameEngine::GameObject::setOrientation(Magnum::Quaternion const& orientation) {
     orientation_ = orientation;
 }

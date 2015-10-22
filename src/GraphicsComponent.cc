@@ -1,6 +1,9 @@
 // std
 #include <iostream>
 
+// Corrade
+#include <Corrade/Utility/Debug.h>
+
 // Magnum
 #include <Magnum/Math/Vector3.h>
 #include <Magnum/Math/Matrix3.h>
@@ -20,7 +23,6 @@ GameEngine::GraphicsComponent::GraphicsComponent(GameEngine::GameObject* owner,
 {
     graphicsObject_ = new Object3D{modelLoader.getScene()};
     modelLoader.loadModel(graphicsObject_, "scene.ogex");
-    graphicsObject_->rotateX(Magnum::Rad(1.5));
 }
 
 GameEngine::GraphicsComponent::~GraphicsComponent() {
@@ -28,11 +30,16 @@ GameEngine::GraphicsComponent::~GraphicsComponent() {
 }
 
 void GameEngine::GraphicsComponent::update() {
-    float x = owner_->position().x;
-    float y = owner_->position().y;
-    float z = owner_->position().z;
-
-    Magnum::Vector3 vector(x, y, z);
-
-    graphicsObject_->setTransformation(Magnum::Matrix4::translation(vector));
+    if(owner_->orientation().axis().normalized().isNormalized()) {
+        Magnum::Matrix4 transform =
+            Magnum::Matrix4::translation(owner_->position()) *
+            Magnum::Matrix4::rotation(owner_->orientation().angle(),
+                    owner_->orientation().axis().normalized());
+        graphicsObject_->setTransformation(transform);
+    } 
+    else {
+        std::cout << "Graphics object transformation error! ";
+        std::cout << "Rotation vector isn't normalized"
+        << std::endl;
+    }
 }

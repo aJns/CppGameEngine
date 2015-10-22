@@ -7,6 +7,10 @@
 // Boost
 #include <boost/python.hpp>
 
+// Magnum
+#include <Magnum/Math/Vector3.h>
+#include <Magnum/Math/Quaternion.h>
+
 // GameEngine
 #include "Vector3.hh"
 #include "Quaternion.hh"
@@ -27,16 +31,16 @@ namespace GameEngine {
         void addScriptComponent(std::string scriptName, boost::python::object&
                 pythonGlobal);
 
-        const GameEngine::Vector3& position() const;
-        void translate(GameEngine::Vector3 const& vector);
-        void moveTo(GameEngine::Vector3 const& vector);
+        const Magnum::Vector3& position() const;
+        void translate(Magnum::Vector3 const& vector);
+        void moveTo(Magnum::Vector3 const& vector);
 
-        const GameEngine::Quaternion& orientation() const;
-        void rotate(GameEngine::Quaternion const& rotation);
-        void setOrientation(GameEngine::Quaternion const& orientation);
+        const Magnum::Quaternion& orientation() const;
+        void rotate(Magnum::Quaternion const& rotation);
+        void setOrientation(Magnum::Quaternion const& orientation);
     private:
-        GameEngine::Vector3 position_;
-        GameEngine::Quaternion orientation_;
+        Magnum::Vector3 position_;
+        Magnum::Quaternion orientation_;
         std::unique_ptr<GameEngine::GraphicsComponent> graphComp_;
         std::unique_ptr<GameEngine::ScriptComponent> scriptComp_;
     };
