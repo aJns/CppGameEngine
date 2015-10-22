@@ -24,7 +24,9 @@ BOOST_PYTHON_MODULE(libGameEngine) {
     // Magnum
     class_<Magnum::Quaternion>("Quaternion", init<Magnum::Quaternion>())
         .def(init<>())
-        .def("rotation", &Magnum::Quaternion::rotation);
+        .def("rotation", &Magnum::Quaternion::rotation)
+        .def("normalized", &Magnum::Quaternion::normalized)
+        .def("isNormalized", &Magnum::Quaternion::isNormalized);
     class_<Magnum::Vector3>("Vector3", init<float, float, float>())
         .def("normalized", &Magnum::Vector3::normalized)
         .def("isNormalized", &Magnum::Vector3::isNormalized);

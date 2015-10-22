@@ -43,7 +43,7 @@ void GameEngine::GameObject::update() {
         scriptComp_->update();
     }
 
-    std::cout << "GameObject: " << this << " updated!" << std::endl;
+    /* std::cout << "GameObject: " << this << " updated!" << std::endl; */
 }
 
 const Magnum::Vector3& GameEngine::GameObject::position() const {
@@ -63,14 +63,14 @@ const Magnum::Quaternion& GameEngine::GameObject::orientation() const {
 }
 
 void GameEngine::GameObject::rotate(Magnum::Quaternion const& rotation) {
-    if(rotation.axis().isNormalized()) {
-        orientation_ = rotation * orientation_;
-    } 
-    else {
-        std::cout << "Can't rotate, axis vector isn't normalized" << std::endl;
+    orientation_ = rotation * orientation_;
+    if(!orientation_.isNormalized()) {
+        orientation_ = orientation_.normalized();
     }
 }
 
 void GameEngine::GameObject::setOrientation(Magnum::Quaternion const& orientation) {
-    orientation_ = orientation;
+    if(!orientation_.isNormalized()) {
+        orientation_ = orientation.normalized();
+    }
 }
